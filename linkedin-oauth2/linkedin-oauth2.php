@@ -75,7 +75,7 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
  * LinkedIn authorization response management
  *----------------------------------------------------------------------------*/
 
-function set_linkedin_data($token, $expiresAt, $expiresIn) {
+function set_linkedin_oauth_data($token, $expiresAt, $expiresIn) {
 	$data = array(
 		'access_token' => $token,
 		'expires_at' => $expiresAt,
@@ -84,7 +84,7 @@ function set_linkedin_data($token, $expiresAt, $expiresIn) {
 	$_SESSION['linkedin_session_data'] = serialize($data);
 }
 
-function get_linkedin_data() {
+function get_linkedin_oauth_data() {
 	if(isset($_SESSION['linkedin_session_data'])) {
 		return maybe_unserialize($_SESSION['linkedin_session_data']);
 	} else {
@@ -119,7 +119,7 @@ function get_linkedin_token() {
 		$keys = json_decode($response['body']);
 
 		if($keys) {
-			update_option( 'LINKEDIN_AUTHENTICATION_TOKEN', $keys->{'access_token'} );
+			set_linkedin_oauth_data($keys->{'access_token'}, $keys->{'expires_at'}, $keys->{'expires_in'});
 		}			
 	//	wp_redirect( get_bloginfo( 'url' ) . '/wp-admin/options-general.php?page=' . LinkedIn_OAuth2::get_instance()->get_plugin_slug() ); 
 		exit; 
@@ -135,6 +135,6 @@ function get_linkedin_token() {
 }
 
 function is_linkedin_user_connected() {
-	$data = get_linkedin_data();
+	$data = get_linkedin_oauth_data();
 	return $data && !empty($data);
 }
