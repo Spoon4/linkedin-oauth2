@@ -29,7 +29,6 @@ function format_linkedin_date($seconds_count){
     return "$days $hours$minutes$seconds";
 }
 
-
 function linkedin_link($label = null) {
 	if(is_null($label)) {
 		$label = __('Authenticate');

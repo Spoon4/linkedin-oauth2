@@ -72,8 +72,6 @@ class LinkedIn_OAuth2_Admin {
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-
-		add_shortcode('linkedin', array($this, 'render_shortcode'));
 		
 		/*
 		 * Define custom functionality.
@@ -202,88 +200,6 @@ class LinkedIn_OAuth2_Admin {
 
 	}
 
-	public function render_shortcode($atts) {
-		$return = '';
-		
-		extract( shortcode_atts( array('id' => 'linkedin-1'), $atts ) );
-		
-		$token = get_option( 'LINKEDIN_AUTHENTICATION_TOKEN' );
-		
-		if($token) {
-			add_filter('https_ssl_verify', '__return_false');
-			$api_url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,industry,summary,positions,picture-url,skills,languages,educations,recommendations-received)?oauth2_access_token=$token&format=json";
-			
-			$response = wp_remote_get( $api_url );
-			
-			$json = json_decode( $response['body'] );
-			
-			$return .= '<section class="shortcuts">';
-			$return .= '<h2><a href="#shortcuts">Quick links</a></h2>';
-			$return .= '<ul>';
-			$return .= '<li><a href="#skills">Skills</a></li>';
-			$return .= '<li><a href="#summary">Summary</a></li>';
-			$return .= '<li><a href="#positions">Positions</a></li>';
-			$return .= '<li><a href="#recommendations">Recommendations</a></li>';
-			$return .= '</ul>';
-			$return .= '</section>';
-			
-			$return .= '<section class="about">';
-			$return .= '<h2>' . $json->{'firstName'} . ' ' . $json->{'lastName'} . '</h2>';
-			$return .= '<p>' . $json->{'headline'} . '</p>';
-			$return .= '</section>';
-			
-			$skills = $json->{'skills'}->{'values'};
-			$first = true;
-			$return .= '<section class="skills">';
-			$return .= '<h2><a href="#" name="skills">Skills</a></h2>';
-			$return .= '<pre style="font-size: smaller;">';
-			foreach($skills as $i => $skill) {
-				$return .= ( $first == false ? ', ' : '') . $skill->{'skill'}->{'name'};
-				$first = false;
-			}
-			$return .= '</pre>';
-			$return .= '<h2><a href="#" name="summary">Summary</a></h2>';
-			$return .= '<pre>' . $json->{'summary'} . '</pre>';
-			$return .= '</section>';
-			
-			$jobs = $json->{'positions'}->{'values'};
-			$return .= '<section class="positions">';
-			$return .= '<h2><a href="#" name="positions">Positions - ' . $json->{'industry'} . '</a></h2>';
-			$return .= '<p>';
-			
-			foreach($jobs as $i => $job) {
-				$return .= '<h2>' . $job->{'title'} . '</h2>';
-				$return .= '<h3>' . $job->{'company'}->{'name'};
-				$return .= ' ( ' . $job->{'startDate'}->{'year'} . ' - ';
-				if($job->{'isCurrent'} == "true"){
-					$return .= 'Current';
-				} else {
-					$return .= $job->{'endDate'}->{'year'};
-				}
-				$return .= ' )</h3>';
-				$return .= '<pre>' . $job->{'summary'} . '</pre>';
-
-			}
-
-			$return .= '</p>';
-			$return .= '</section>';
-			
-			$recommendations = $json->{'recommendationsReceived'}->{'values'};
-			$return .= '<section class="recommendations">';
-			$return .= '<h2><a href="#" name="recommendations">Recommendations</a></h2>';
-			foreach($recommendations as $i => $recommendation) {
-				$recommendedBy = $recommendation->{'recommender'};
-				$return .= '<h3>' . $recommendedBy->{'firstName'} . ' ' . $recommendedBy->{'lastName'} . '</h3>';
-				$return .= '<blockquote>';
-				$return .= $recommendation->{'recommendationText'};				
-				$return .= '</blockquote>';				
-			}
-			$return .= '</section>';
-
-			return $return;
-		}
-	}
-	
 	/**
 	 * NOTE:     Actions are points in the execution of a page or process
 	 *           lifecycle that WordPress fires.
