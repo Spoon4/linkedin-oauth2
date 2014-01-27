@@ -7,7 +7,7 @@
  *
  * @package   LinkedIn_OAuth2
  * @author    Spoon <spoon4@gmail.com>
- * @license   MIT
+ * @license   GPL-2.0+
  * @link      https://github.com/Spoon4/linkedin-oauth2
  * @copyright 2014 Spoon
  *
@@ -19,7 +19,7 @@
  * Author:            Spoon
  * Author URI:        https://github.com/Spoon4
  * Text Domain:       linkedin-oauth2-locale
- * License:           MIT
+ * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /languages
  * GitHub Plugin URI: https://github.com/spoon4/linkedin-oauth2
@@ -34,6 +34,7 @@ if ( ! defined( 'LINKEDIN_OAUTH_URL' ) ) {
 	define('LINKEDIN_OAUTH_URL', 'https://www.linkedin.com/uas/oauth2');
 }
 
+require_once( plugin_dir_path( __FILE__ ) . 'includes/http_build_url.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' );
 
 /*----------------------------------------------------------------------------*

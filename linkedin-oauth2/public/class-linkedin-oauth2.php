@@ -4,7 +4,7 @@
  *
  * @package   LinkedIn_OAuth2
  * @author    Spoon <spoon4@gmail.com>
- * @license   MIT
+ * @license   GPL-2.0+
  * @link      https://github.com/Spoon4/linkedin-oauth2
  * @copyright 2014 Spoon
  */
