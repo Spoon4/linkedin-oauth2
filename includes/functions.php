@@ -120,18 +120,23 @@ function get_linkedin_token() {
 	return null;
 }
 
-function get_linkedin_authorization_url() {
+/**
+ * Build the autorization code URL.
+ *
+ * @param string $scope Space separated list of LinkedIn memeber permissions to set. Default is 'r_fullprofile'.
+ * @return string The autorization code URL.
+ */
+function get_linkedin_authorization_url($scope='r_fullprofile') {
 	$api_key = get_option( 'LINKEDIN_API_KEY' );
 	$api_secret = get_option( 'LINKEDIN_API_SECRET_KEY' );
 	
 	if($api_key && $api_secret) {
-		$redirect = get_linkedin_redirect_url();
 		$args = array(
 			'response_type' => 'code',
 			'client_id'     => $api_key,
-			'scope'         => 'r_fullprofile',
+			'scope'         => urlencode($scope),
 			'state'         => base64_encode(time()),
-			'redirect_uri'  => $redirect,
+			'redirect_uri'  => get_linkedin_redirect_url(),
 		);
 		
 		return LINKEDIN_OAUTH_URL . "/authorization?" . http_build_query($args);
