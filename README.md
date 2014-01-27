@@ -49,28 +49,42 @@ e.g.
 3. Upload the `linkedin-oauth2` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
-## Updates
+## Recommended Tools
+
+### Localization Tools
+
+The LinkedIn OAuth2 plugin uses a variable to store the text domain used when internationalizing strings. To take advantage of this method,
+there are tools that are recommended for providing correct, translatable files:
+
+* [Poedit](http://www.poedit.net/)
+* [makepot](http://i18n.svn.wordpress.org/tools/trunk/)
+* [i18n](https://github.com/grappler/i18n)
+
+Any of the above tools should provide you with the proper tooling to localize strings.
+
+### GitHub Updater
 
 This plugin supports the [GitHub Updater](https://github.com/afragen/github-updater) plugin, so if you install that, this plugin becomes automatically updateable direct from GitHub. Any submission to WP.org repo will make this redundant.
 
-## Frequently Asked Questions
+## License
 
-### A question that someone might have
+The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.
 
-An answer to that question.
+> This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as
+published by the Free Software Foundation.
 
-### What about foo bar?
+> This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-Answer to foo bar dilemma.
-
-## Screenshots
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif).
-2. This is the second screen shot
+> You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 ## Changelog
 
 ### 1.0
 
-* A change since the previous version.
-* Another change.
+* First stable version of the LinkedIn OAuth2 plugin.
