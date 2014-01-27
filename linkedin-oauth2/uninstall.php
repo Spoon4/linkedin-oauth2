@@ -2,11 +2,11 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package   Plugin_Name
- * @author    Your Name <email@example.com>
- * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2014 Your Name or Company Name
+ * @package   LinkedIn_OAuth2
+ * @author    Spoon <spoon4@gmail.com>
+ * @license   MIT
+ * @link      https://github.com/Spoon4/linkedin-oauth2
+ * @copyright 2014 Spoon
  */
 
 // If uninstall not called from WordPress, then exit
@@ -14,4 +14,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// @TODO: Define uninstall functionality here
+if(!session_id()) {
+	LinkedIn_OAuth2::get_instance()->destroy_linkedin_session();
+}

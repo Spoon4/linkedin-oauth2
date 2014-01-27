@@ -168,8 +168,8 @@ class LinkedIn_OAuth2_Admin {
 		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Linked In Options', $this->plugin_slug ),
 			__( 'LinkedIn Options', $this->plugin_slug ),
+			__( 'LinkedIn', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )

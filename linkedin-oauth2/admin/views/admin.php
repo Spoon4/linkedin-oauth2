@@ -30,19 +30,41 @@
 	?>
 	
 	<form name="options" method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-		<label for="api_key">API Key<span class="required">(*)</span>: </label>
+		<table class="form-table">
+			<tr valign="row">
+				<th scope="row"><label for="api_key">API Key<span class="required"> (*)</span>: </label></th>
+				<td><input type="text" name="api_key" value="<?php echo get_option( 'LINKEDIN_API_KEY', '' ); ?>" size="70" class="regular-text"></td>
+			</tr>
+			<tr valign="row">
+				<th scope="row"><label for="api_secret_key">Consumer Secret<span class="required"> (*)</span>: </label></th>
+				<td><input type="text" name="api_secret_key" value="<?php echo get_option( 'LINKEDIN_API_SECRET_KEY', '' ); ?>" size="70" class="regular-text"></td>
+			</tr>
+			<tr valign="row">
+				<th scope="row"><label for="api_secret_key">Authentication Token: </label></th>
+				<td><?php echo get_linkedin_token(); ?></td>
+			</tr>
+		</table>
+		<?php /*
+		<label for="api_key"><?php __('API Key')?><span class="required"> (*)</span>: </label>
 		<input type="text" name="api_key" value="<?php echo get_option( 'LINKEDIN_API_KEY', '' ); ?>" size="70">
 		<br />
-		<label for="api_secret_key">Consumer Secret<span class="required">(*)</span>: </label>
+		<label for="api_secret_key"><?php __('Consumer Secret')?><span class="required"> (*)</span>: </label>
 		<input type="text" name="api_secret_key" value="<?php echo get_option( 'LINKEDIN_API_SECRET_KEY', '' ); ?>" size="70">	
-		<br />				
-		<label for="bearer_token">Authentication Token: </label>
+		<br />
+		<label for="bearer_token"><?php __('Authentication Token: ')?></label>
 		<input type="text" disabled value="<?php echo get_option( 'LINKEDIN_AUTHENTICATION_TOKEN', '' ); ?>" size="70">
 		<br />
 		<input class="button-primary" type="submit" name="save" />
 		<br/>
-		<small>You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here</a></small>				
+		<small><?php __('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here')?></a></small>				
+		*/ ?>
+		<p class="submit">
+			<input type="submit" name="submit" id="submit" class="button button-primary" value="Save">
+			<?php if(!is_linkedin_user_connected()):?>
+				<?php linkedin_link();?>
+			<?php endif;?>
+		</p>
+		<br/>
+		<small>You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here</a></small>
 	</form>
-	<br />
-	<?php echo do_shortcode('[linkedin]'); ?>
 </div>
