@@ -7,7 +7,6 @@
  * @copyright 2014 Spoon
  */
 
-
 function format_linkedin_date($seconds_count){
     $days       = floor($seconds_count/86400);
     $seconds_count = $seconds_count - (86400 * $days);
@@ -36,4 +35,16 @@ function linkedin_link($label = null) {
 	?>
 		<a class="linkedin-btn" type="button" href="<?php echo get_linkedin_authorization_url(); ?>"><?php echo $label?></a>
 	<?php
+}
+
+function get_linkedin_profile($token, $memeberId='~') {
+	$profile = new LinkedInProfile($token, $memeberId);
+	return $profile->get();
+}
+
+function post_linkedin_comment($token, $postId, $title, $body) {
+	$share = new LinkedInShare($token);
+	$post = $share->get($postId);
+	$comment = new LinkedInNetwork($token);
+	return $comment->postComment($body);
 }

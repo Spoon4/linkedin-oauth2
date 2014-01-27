@@ -29,13 +29,20 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
 if ( ! defined( 'LINKEDIN_OAUTH_URL' ) ) {
 	define('LINKEDIN_OAUTH_URL', 'https://www.linkedin.com/uas/oauth2');
+}
+if ( ! defined( 'LINKEDIN_QUERY_URL' ) ) {
+	define('LINKEDIN_QUERY_URL', 'https://api.linkedin.com/v1');
 }
 
 require_once( plugin_dir_path( __FILE__ ) . 'includes/http_build_url.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-token.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-rest.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-profile.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-share.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-network.php' );
 
 /*----------------------------------------------------------------------------*
  * Public-Facing Functionality
