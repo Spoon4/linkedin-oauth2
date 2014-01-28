@@ -52,8 +52,8 @@ function linkedin_link($label = null) {
 	<?php
 }
 
-function get_linkedin_profile($token, $memeberId = '~') {
-	$profile = new LinkedInProfile($token, $memeberId);
+function get_linkedin_profile($token, $member = '~') {
+	$profile = new LinkedInProfile($token, $member);
 	return $profile->get();
 }
 

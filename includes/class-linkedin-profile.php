@@ -11,27 +11,31 @@
  */
 class LinkedInProfile extends LinkedInRest
 {	
-	private $resource;
+	const ME = '~';
+	
+	private $member;
 	private $fields;
 	
 	/**
 	 * Constructor
 	 *
 	 * @param string $token An authentication valid token
-	 * @param string $resource The resource profile to reach (connected user by default)
+	 * @param string $member The member profile id or URL to reach (connected user by default)
 	 * @param array $fields The list of fields to get in response
 	 * @param boolean $secure Set Profile API responses' returned URLs to be HTTPS or not
  	 *
  	 * @since    1.0.0
 	 */
-	public function __construct($token, $resource = '~', $fields = array(), $secure = false) {
-		$this->resource = $resource;
+	public function __construct($token, $member, $fields = array(), $secure = false) {
+		
+		$this->member = $member;
 		
 		if(empty($fields)) {
 			$fields = $this->getDefaultFields();
 		}
 		$this->fields = $fields;
-		parent::__construct($token, "/people/$this->resource", $secure);
+		
+		parent::__construct($token, '/people/' . $this->getResource());
 		
 		if($secure)
 			$this->addParameter('secure-urls', 'true');
@@ -46,6 +50,21 @@ class LinkedInProfile extends LinkedInRest
 	 */
 	protected function getServiceURL() {
 		return $this->getURL() . $this->getFormattedFields() . '?' . $this->getQueryString();
+	}
+	
+	/**
+	 * Get the service URL resource parameter from member value.
+	 *
+	 * @return string The resource parameter
+ 	 *
+ 	 * @since    1.0.0
+	 */
+	protected function getResource() {
+		if($this->member == self::ME)
+			return $this->member;
+		if(is_url($this->member))
+			return "url=$this->member"; 
+		return "id=$this->member";
 	}
 	
 	/**
