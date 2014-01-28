@@ -22,6 +22,12 @@ class LinkedInNetwork extends LinkedInRest
 	private $resource;
 	private $type = '';
 	
+	/**
+	 * Constructor
+	 *
+	 * @param string $token An authentication valid token.
+	 * @param string $resource The resource profile to reach (connected user by default).
+	 */
 	public function __construct($token, $resource = '~') {
 		$this->resource = $resource;
 		parent::__construct($token, "/people/$this->resource/");
