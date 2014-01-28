@@ -62,8 +62,10 @@ class LinkedInProfile extends LinkedInRest
 	protected function getResource() {
 		if($this->member == self::ME)
 			return $this->member;
+			
 		if(is_url($this->member))
 			return "url=$this->member"; 
+			
 		return "id=$this->member";
 	}
 	
