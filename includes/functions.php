@@ -49,6 +49,14 @@ function is_linkedin_user_connected() {
 	return false;
 }
 
+function is_linkedin_token_valid() {
+	$data = get_linkedin_oauth_data();
+	if(!empty($data) && isset($data['access_token']) && isset($data['expires_at'])) {
+		return $data['expires_at'] !== '' && time() < $data['expires_at'];
+	}
+	return false;
+}
+
 function get_linkedin_redirect_url() {
 	$url = 'http';
 	
@@ -144,10 +152,21 @@ function get_linkedin_authorization_url($scope='r_fullprofile') {
 	return '';
 }
 
-function is_linkedin_token_valid() {
-	$data = get_linkedin_oauth_data();
-	if(!empty($data) && isset($data['access_token']) && isset($data['expires_at'])) {
-		return $data['expires_at'] !== '' && time() < $data['expires_at'];
+function clear_linkedin_data() {
+	if(session_id()) {
+		LinkedIn_OAuth2::get_instance()->destroy_linkedin_session();
 	}
-	return false;
+}
+
+/**
+ * @return WP_Error
+ */
+function linkedin_errors() {
+	$data = get_linkedin_oauth_data();
+	if($data && isset($data['error'])) {
+		$error = new WP_Error($data['error'], $data['message']);
+		clear_linkedin_data();
+		return $error;
+	}
+	return null;
 }

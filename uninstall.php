@@ -14,6 +14,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-if(!session_id()) {
-	LinkedIn_OAuth2::get_instance()->destroy_linkedin_session();
-}
+clear_linkedin_data();
