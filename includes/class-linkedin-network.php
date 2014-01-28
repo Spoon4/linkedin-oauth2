@@ -25,14 +25,23 @@ class LinkedInNetwork extends LinkedInRest
 	/**
 	 * Constructor
 	 *
-	 * @param string $token An authentication valid token.
-	 * @param string $resource The resource profile to reach (connected user by default).
+	 * @param string $token An authentication valid token
+	 * @param string $resource The resource profile to reach (connected user by default)
+ 	 *
+ 	 * @since    1.0.0
 	 */
 	public function __construct($token, $resource = '~') {
 		$this->resource = $resource;
 		parent::__construct($token, "/people/$this->resource/");
 	}
 	
+	/**
+	 * Get the service full URL for service call, including GET parameters
+	 *
+	 * @return string The full URL
+ 	 *
+ 	 * @since    1.0.0
+	 */
 	protected function getServiceURL() {
 		return $this->getURL() . $this->getType() . '?' . $this->getQueryString();
 	}

@@ -15,6 +15,8 @@
  * Save data of connected user.
  *
  * @param object $response The response of the authentication service call
+ *
+ * @since    1.0.0
  */
 function set_linkedin_oauth_data($response) {
 	if(isset($response->error)) {
@@ -39,6 +41,8 @@ function set_linkedin_oauth_data($response) {
  * Get data of connected user.
  *
  * @return array The saved data
+ *
+ * @since    1.0.0
  */
 function get_linkedin_oauth_data() {
 	if(isset($_SESSION['linkedin_session_data'])) {
@@ -52,6 +56,8 @@ function get_linkedin_oauth_data() {
  * Check if a user is "LinkedIn connected".
  *
  * @return boolean
+ *
+ * @since    1.0.0
  */
 function is_linkedin_user_connected() {
 	$data = get_linkedin_oauth_data();
@@ -68,6 +74,8 @@ function is_linkedin_user_connected() {
  * Check if a saved token exists and is not expired.
  *
  * @return boolean
+ *
+ * @since    1.0.0
  */
 function is_linkedin_token_valid() {
 	$data = get_linkedin_oauth_data();
@@ -81,6 +89,8 @@ function is_linkedin_token_valid() {
  * Get redirect URL from current page.
  *
  * @return string The current URL
+ *
+ * @since    1.0.0
  */
 function get_linkedin_redirect_url() {
 	$url = 'http';
@@ -112,6 +122,8 @@ function get_linkedin_redirect_url() {
 
 /**
  * TODO: must be well commented !
+ *
+ * @since    1.0.0
  */
 function check_linkedin_authorization_code() {
 	$redirect = get_linkedin_redirect_url();
@@ -150,6 +162,8 @@ function check_linkedin_authorization_code() {
  * Retreive saved token of user if connected and valid.
  *
  * @return string The access token
+ *
+ * @since    1.0.0
  */
 function get_linkedin_token() {
 	if(is_linkedin_user_connected() && is_linkedin_token_valid()) {
@@ -166,8 +180,10 @@ function get_linkedin_token() {
  *
  * @param string $scope Space separated list of LinkedIn memeber permissions to set. Default is 'r_fullprofile'
  * @return string The autorization code URL
+ *
+ * @since    1.0.0
  */
-function get_linkedin_authorization_url($scope='r_fullprofile') {
+function get_linkedin_authorization_url($scope='r_fullprofile rw_nus') {
 	$api_key = get_option('LINKEDIN_API_KEY');
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
 	
@@ -175,7 +191,7 @@ function get_linkedin_authorization_url($scope='r_fullprofile') {
 		$args = array(
 			'response_type' => 'code',
 			'client_id'     => $api_key,
-			'scope'         => urlencode($scope),
+			'scope'         => $scope,
 			'state'         => base64_encode(time()),
 			'redirect_uri'  => get_linkedin_redirect_url(),
 		);
@@ -187,6 +203,8 @@ function get_linkedin_authorization_url($scope='r_fullprofile') {
 
 /**
  * Clean LinkedIn user data (token, errors...).
+ *
+ * @since    1.0.0
  */
 function clear_linkedin_data() {
 	if(session_id()) {
@@ -198,6 +216,8 @@ function clear_linkedin_data() {
  * Get the authentication errors.
  *
  * @return WP_Error
+ *
+ * @since    1.0.0
  */
 function linkedin_errors() {
 	$data = get_linkedin_oauth_data();
