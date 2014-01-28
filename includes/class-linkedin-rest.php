@@ -14,6 +14,8 @@
  * @see http://developer.linkedin.com/documents/using-url-query-parameters
  * @see http://developer.linkedin.com/documents/writing-linkedin-apis
  * @see http://developer.linkedin.com/documents/request-and-response-headers
+ *
+ * @since    1.0.0
  */
 abstract class LinkedInRest 
 {	

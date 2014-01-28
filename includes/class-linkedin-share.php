@@ -7,7 +7,9 @@
  * @copyright 2014 Spoon
  */
 
-
+/**
+ * @since    1.0.0
+ */
 class LinkedInShareVisibility
 {
 	const ANYONE = 'anyone';
@@ -16,6 +18,8 @@ class LinkedInShareVisibility
 
 /**
  * @see http://developer.linkedin.com/documents/share-api
+ *
+ * @since    1.0.0
  */
 class LinkedInShare extends LinkedInRest
 {	
@@ -85,21 +89,18 @@ class LinkedInShare extends LinkedInRest
 	/**
 	 * Test if a value is valid or not depending on its type.
 	 * - value mustn't be null
-	 * - value must be set if $testInstance parameter is true. For example for array entries
+	 * - value must be set
 	 * - value mustn't be empty if it's a string
 	 * - value mustn't be equal to 0 if numeric
 	 *
 	 * @param mixed $value The data to test
-	 * @param boolean $testInstance Set if isset() function must be called (default is true).
 	 * @return boolean Is valid or not
  	 *
  	 * @since    1.0.0
 	 */
-	private function isValid($value, $testInstance = true) {
-		if(is_null($value))
+	private function isValid($value) {
+		if(is_null($value) || isset($value))
 			return false;
-		if($testInstance && !isset($value))
-			return  false;
 		if(is_string($value))
 			return '' !== $value;
 		if(is_numeric($value))
@@ -113,6 +114,8 @@ class LinkedInShare extends LinkedInRest
 	 *
 	 * @param array $data POST data to validate
 	 * @return WP_Error|null If all requirements are ok, null is return
+ 	 *
+ 	 * @since    1.0.0
 	 */
 	private function requirements($data) {
 		if(!$this->isValid($data['title']) && !$this->isValid($data['submitted-url']) && !$this->isValid($data['comment'])) {

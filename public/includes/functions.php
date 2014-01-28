@@ -7,6 +7,14 @@
  * @copyright 2014 Spoon
  */
 
+/**
+ * Format a date to human readable.
+ *
+ * @param integer $seconds_count The date to format in seconds
+ * @param string The formatted date
+ *
+ * @since    1.0.0
+ */
 function format_linkedin_date($seconds_count){
     $days       = floor($seconds_count/86400);
     $seconds_count = $seconds_count - (86400 * $days);
@@ -28,6 +36,13 @@ function format_linkedin_date($seconds_count){
     return "$days $hours$minutes$seconds";
 }
 
+/**
+ * Display the LinkedIn sign in link.
+ *
+ * @param string $label The label of the link
+ *
+ * @since    1.0.0
+ */
 function linkedin_link($label = null) {
 	if(is_null($label)) {
 		$label = __('Authenticate');
@@ -42,9 +57,7 @@ function get_linkedin_profile($token, $memeberId = '~') {
 	return $profile->get();
 }
 
-function post_linkedin_comment($token, $postId, $body) {
+function post_linkedin_share($token, $data) {
 	$share = new LinkedInShare($token);
-	$post = $share->getPost($postId);
-	$comment = new LinkedInNetwork($token);
-	return $comment->postComment($body);
+	return $share->share($postId);
 }

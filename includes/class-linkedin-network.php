@@ -10,6 +10,8 @@
  * @see http://developer.linkedin.com/documents/commenting-reading-comments-and-likes-network-updates
  * @see http://developer.linkedin.com/documents/get-network-updates-and-statistics-api
  * @see http://developer.linkedin.com/documents/post-network-update
+ *
+ * @since    1.0.0
  */
 class LinkedInNetwork extends LinkedInRest
 {

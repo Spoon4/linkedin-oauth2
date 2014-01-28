@@ -8,6 +8,8 @@
  */
 /**
  * @see http://developer.linkedin.com/documents/profile-api
+ *
+ * @since    1.0.0
  */
 class LinkedInProfile extends LinkedInRest
 {	
