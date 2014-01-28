@@ -10,22 +10,7 @@
  * @see http://developer.linkedin.com/documents/profile-api
  */
 class LinkedInProfile extends LinkedInRest
-{
-	const DEFAULT_FIELDS = array(
-		'id',
-		'first-name',
-		'last-name',
-		'headline',
-		'industry',
-		'summary',
-		'positions',
-		'picture-url',
-		'skills',
-		'languages',
-		'educations',
-		'recommendations-received',
-	);
-	
+{	
 	private $resource;
 	private $fields;
 	
@@ -40,7 +25,7 @@ class LinkedInProfile extends LinkedInRest
 		$this->resource = $resource;
 		
 		if(empty($fields)) {
-			$fields = self::DEFAULT_FIELDS;
+			$fields = $this->getDefaultFields();
 		}
 		$this->fields = $fields;
 		parent::__construct($token, "/people/$this->resource");
@@ -52,7 +37,29 @@ class LinkedInProfile extends LinkedInRest
 	 * @return string The full URL.
 	 */
 	protected function getServiceURL() {
-		return $this->getURL() . $this->getFields() . '?' . $this->getQueryString();
+		return $this->getURL() . $this->getFormattedFields() . '?' . $this->getQueryString();
+	}
+	
+	/**
+	 * Get default profile fields
+	 *
+	 * @return array The list of fields.
+	 */
+	private function getDefaultFields() {
+		return array(
+				'id',
+				'first-name',
+				'last-name',
+				'headline',
+				'industry',
+				'summary',
+				'positions',
+				'picture-url',
+				'skills',
+				'languages',
+				'educations',
+				'recommendations-received',
+			);
 	}
 	
 	/**
@@ -60,7 +67,7 @@ class LinkedInProfile extends LinkedInRest
 	 *
 	 * @return string The formatted field list.
 	 */
-	private function getFields() {
+	private function getFormattedFields() {
 		if($this->fields)
 			return ':('.join(',', $this->fields).')';
 		else
