@@ -1,19 +1,19 @@
 <?php
 /**
+ * Base class for REST API calls.
+ *
+ * @abstract
+ *
  * @package   LinkedInRest
  * @author    Spoon <spoon4@gmail.com>
  * @license   GPL-2.0+
  * @link      https://github.com/Spoon4/linkedin-oauth2
+ * @link      http://developer.linkedin.com/documents/reading-data
+ * @link      http://developer.linkedin.com/documents/using-url-query-parameters
+ * @link      http://developer.linkedin.com/documents/writing-linkedin-apis
+ * @link      http://developer.linkedin.com/documents/request-and-response-headers
  * @copyright 2014 Spoon
- */
-/**
- * Base class for REST API calls.
  *
- * @abstract
- * @see http://developer.linkedin.com/documents/reading-data
- * @see http://developer.linkedin.com/documents/using-url-query-parameters
- * @see http://developer.linkedin.com/documents/writing-linkedin-apis
- * @see http://developer.linkedin.com/documents/request-and-response-headers
  *
  * @since    1.0.0
  */

@@ -4,10 +4,8 @@
  * @author    Spoon <spoon4@gmail.com>
  * @license   GPL-2.0+
  * @link      https://github.com/Spoon4/linkedin-oauth2
+ * @link      http://developer.linkedin.com/documents/profile-api
  * @copyright 2014 Spoon
- */
-/**
- * @see http://developer.linkedin.com/documents/profile-api
  *
  * @since    1.0.0
  */
