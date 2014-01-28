@@ -24,7 +24,7 @@ class LinkedInNetwork extends LinkedInRest
 	
 	public function __construct($token, $resource = '~') {
 		$this->resource = $resource;
-		parent::__construct($token, LINKEDIN_QUERY_URL . "/people/$this->resource/network/updates");
+		parent::__construct($token, "/people/$this->resource/");
 	}
 	
 	protected function getServiceURL() {
@@ -39,9 +39,9 @@ class LinkedInNetwork extends LinkedInRest
 		return $this->type;
 	}
 	
-	public function getUpdate($updateKey, $type) {
-		$this->setType($type);
-		$api_url = $this->getURL() . "/key=$updateKey/" . $this->getType() . '?' . $this->getQueryString();
+	public function getUpdate($updateKey, $context) {
+		$this->setType(self::UPDATES);
+		$api_url = $this->getURL() . "/key=$updateKey/$context?" . $this->getQueryString();
 	}
 	
 	public function postComment($comment) {
@@ -54,7 +54,7 @@ class LinkedInNetwork extends LinkedInRest
 //		$body->{'update-comments'}->{'update-comment'}->timestamp = time();
 		$body_json = json_encode($body);
 		
-		$this->setType(self::COMMENT);
+		$this->setType(self::UPDATES);
 		return $this->post($body_json);
 	}
 }

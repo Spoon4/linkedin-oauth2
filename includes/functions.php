@@ -111,7 +111,7 @@ function check_linkedin_authorization_code() {
 }
 
 function get_linkedin_token() {
-	if(is_linkedin_token_valid()) {
+	if(is_linkedin_user_connected() && is_linkedin_token_valid()) {
 		$data = get_linkedin_oauth_data();
 		if(isset($data['access_token'])) {
 			return $data['access_token'];
@@ -146,11 +146,8 @@ function get_linkedin_authorization_url($scope='r_fullprofile') {
 
 function is_linkedin_token_valid() {
 	$data = get_linkedin_oauth_data();
-	if(!empty($data)) {
-		if(isset($data['access_token']) && isset($data['expires_at'])) {
-			return $data['expires_at'] !== '' && time() < $data['expires_at'];
-		}
-		return false;
+	if(!empty($data) && isset($data['access_token']) && isset($data['expires_at'])) {
+		return $data['expires_at'] !== '' && time() < $data['expires_at'];
 	}
-	return true;
+	return false;
 }

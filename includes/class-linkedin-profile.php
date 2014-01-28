@@ -20,7 +20,7 @@ class LinkedInProfile extends LinkedInRest
 		if(empty($fields)) {
 			$this->fields = self::DEFAULT_FIELDS;
 		}
-		parent::__construct($token, LINKEDIN_QUERY_URL . "/people/$this->resource");
+		parent::__construct($token, "/people/$this->resource");
 	}
 	
 	protected function getServiceURL() {

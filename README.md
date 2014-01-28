@@ -68,7 +68,7 @@ This plugin supports the [GitHub Updater](https://github.com/afragen/github-upda
 
 ## License
 
-The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.
+The LinkedIn OAuth2 plugin is licensed under the GPL v2 or later.
 
 > This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as

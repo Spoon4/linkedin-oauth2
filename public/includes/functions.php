@@ -37,14 +37,14 @@ function linkedin_link($label = null) {
 	<?php
 }
 
-function get_linkedin_profile($token, $memeberId='~') {
+function get_linkedin_profile($token, $memeberId = '~') {
 	$profile = new LinkedInProfile($token, $memeberId);
 	return $profile->get();
 }
 
-function post_linkedin_comment($token, $postId, $title, $body) {
+function post_linkedin_comment($token, $postId, $body) {
 	$share = new LinkedInShare($token);
-	$post = $share->get($postId);
+	$post = $share->getPost($postId);
 	$comment = new LinkedInNetwork($token);
 	return $comment->postComment($body);
 }

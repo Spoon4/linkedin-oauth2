@@ -38,7 +38,7 @@ if ( ! defined( 'LINKEDIN_QUERY_URL' ) ) {
 
 require_once( plugin_dir_path( __FILE__ ) . 'includes/http_build_url.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-token.php' );
+//require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-token.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-rest.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-profile.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-share.php' );

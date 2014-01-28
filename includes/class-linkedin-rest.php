@@ -14,15 +14,14 @@
  * @see http://developer.linkedin.com/documents/request-and-response-headers
  */
 abstract class LinkedInRest 
-{
-	const TOKEN_PARAMETER = 'oauth2_access_token';
-	
+{	
 	protected $url;
 	protected $token;
+	protected $format = 'json';
 	protected $params = array();
 	
 	public function __construct($token, $url) {
-		$this->url = $url;
+		$this->url = LINKEDIN_QUERY_URL . $url;
 		$this->token = $token;
 		$this->addParameter('access_token', $this->token);
 		$this->addParameter('format', 'json');
@@ -33,7 +32,7 @@ abstract class LinkedInRest
 	}
 	
 	protected function getQueryString() {
-		return "oauth2_access_token=$this->token&format=json";
+		return "oauth2_access_token=$this->token&format=$this->format";
 	}
 	
 	public function addParameter($key, $value) {
@@ -53,9 +52,9 @@ abstract class LinkedInRest
 				'blocking'    => true,
 				'body'        => $args
 			);
-			$response = wp_remote_post( $api_url, $args );
+			$response = wp_remote_post($api_url, $args);
 		} elseif('get' == strtolower($method)) {		
-			$response = wp_remote_get( $api_url );
+			$response = wp_remote_get($api_url);
 		} else {
 			return null;
 		}
@@ -63,19 +62,20 @@ abstract class LinkedInRest
 		if($response instanceof WP_Error)
 			return $response->get_error_message();
 		else
-			return json_decode( $response['body'] );
+			return json_decode($response['body']);
 	}
 	
 	public function get() {
 		return $this->call('get', null);
 	}
 	
-	public function post($params=array()) {
+	public function post(array $params) {
 		return $this->call('post', $params);
 	}
 	
 	/**
 	 * @abstract
+	 * @return string The full URL for service call, including GET parameters.
 	 */
 	abstract protected function getServiceURL();
 }

@@ -12,11 +12,15 @@
 class LinkedInShare extends LinkedInRest
 {	
 	public function __construct($token) {
-		parent::__construct($token, LINKEDIN_QUERY_URL . "/people/~/network/shares");
+		parent::__construct($token, "/people/~/network/shares");
 	}
 	
 	protected function getServiceURL() {
 		return $this->getURL() . '?' . $this->getQueryString();
+	}
+	
+	public function getPost($postId) {
+		
 	}
 	
 	public function share($title, $url, $description=null, $comment=null, $image=null, $visibility='anyone') {
@@ -34,7 +38,7 @@ class LinkedInShare extends LinkedInRest
 			$body->content->{'submitted-image-url'} = $image;
 		}
 		if(!is_null($description)) {
-			$body->content->{'description'} = $description;
+			$body->content->description = $description;
 		}
 		
 		$body->visibility = new stdClass();

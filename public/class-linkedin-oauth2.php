@@ -13,9 +13,6 @@
  * Plugin class. This class should ideally be used to work with the
  * public-facing side of the WordPress site.
  *
- * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-linkedin-oauth2-admin.php`
- *
  * @package LinkedIn_OAuth2
  * @author  Spoon <spoon4@gmail.com>
  */
@@ -32,11 +29,6 @@ class LinkedIn_OAuth2 {
 
 	/**
 	 * Unique identifier for your plugin.
-	 *
-	 *
-	 * The variable name is used as the text domain when internationalizing strings
-	 * of text. Its value should match the Text Domain file header in the main
-	 * plugin file.
 	 *
 	 * @since    1.0.0
 	 *
