@@ -148,7 +148,7 @@ function check_linkedin_authorization_code() {
 		add_filter('https_ssl_verify', '__return_false');
 		$response = wp_remote_post(LINKEDIN_OAUTH_URL . '/accessToken', $args);
 		
-		$keys = json_decode(wp_remote_retrieve_body('body'));
+		$keys = json_decode(wp_remote_retrieve_body($response));
 		
 		if($keys) {
 			set_linkedin_oauth_data($keys);
