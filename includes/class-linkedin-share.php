@@ -67,7 +67,7 @@ class LinkedInShare extends LinkedInRest
 		if($this->isValid($data['comment']))
 			$body->comment = $data['comment'];
 
-                $body->content = new stdClass();
+        $body->content = new stdClass();
 		
 		if($this->isValid($data['content']['title']))
 			$body->content->title = $data['content']['title'];

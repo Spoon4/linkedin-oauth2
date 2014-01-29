@@ -59,3 +59,4 @@ function get_linkedin_profile($token, $member = '~', $fields = array(), $secure 
 function post_linkedin_share($token, $data) {
 	$share = new LinkedInShare($token);
 	return $share->share($data);
+}
