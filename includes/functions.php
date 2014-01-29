@@ -176,12 +176,12 @@ function get_linkedin_token() {
 /**
  * Build the autorization code URL.
  *
- * @param string $scope Space separated list of LinkedIn memeber permissions to set. Default is 'r_fullprofile'
+ * @param string $scope Space separated list of LinkedIn memeber permissions to set. Default is 'r_basicprofile'
  * @return string The autorization code URL
  *
  * @since    1.0.0
  */
-function get_linkedin_authorization_url($scope='r_fullprofile rw_nus') {
+function get_linkedin_authorization_url($scope='r_basicprofile') {
 	$api_key = get_option('LINKEDIN_API_KEY');
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
 	
@@ -205,9 +205,9 @@ function get_linkedin_authorization_url($scope='r_fullprofile rw_nus') {
  * @since    1.0.0
  */
 function clear_linkedin_data() {
-	if(session_id()) {
-		LinkedIn_OAuth2::get_instance()->destroy_linkedin_session();
-	}
+    if(session_id()) {
+        session_destroy();
+    }
 }
 
 /**

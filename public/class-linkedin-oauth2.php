@@ -55,8 +55,6 @@ class LinkedIn_OAuth2 {
 		
 		// PHP session management
 		add_action( 'init', array( $this, 'start_linkedin_session'), 1 );
-		add_action( 'wp_logout', array( $this, 'destroy_linkedin_session' ) );
-		add_action( 'wp_login', array( $this, 'destroy_linkedin_session' ) );
 		
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -310,15 +308,5 @@ class LinkedIn_OAuth2 {
 		if(!session_id()) {
 			session_start();
 		}
-	}
-
-	/**
-	 * Destroy existing PHP session.
-	 *
-	 * @since    1.0.0
-	 */
-	public function destroy_linkedin_session() {
-            error_log(destroy_linkedin_session);
-            //session_destroy();
 	}
 }
