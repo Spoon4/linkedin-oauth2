@@ -36,13 +36,24 @@ if ( ! defined( 'LINKEDIN_QUERY_URL' ) ) {
 	define('LINKEDIN_QUERY_URL', 'https://api.linkedin.com/v1');
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/http_build_url.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/libs/http_build_url.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/libs/is_url.php' );
+
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/exceptions/class-linkedin-exception.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/exceptions/class-datastore-exception.php' );
+
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/class-linkedin-token.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/class-linkedin-user.php' );
+
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/datastore/class-linkedin-datastore.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/datastore/class-session-datastore.php' );
+
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/rest/class-linkedin-rest.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/rest/class-linkedin-profile.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/rest/class-linkedin-share.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/rest/class-linkedin-network.php' );
+
 require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php' );
-//require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-token.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-rest.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-profile.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-share.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-linkedin-network.php' );
 
 /*----------------------------------------------------------------------------*
  * Public-Facing Functionality
