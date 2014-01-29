@@ -316,7 +316,8 @@ class LinkedIn_OAuth2 {
 	 * @since    1.0.0
 	 */
 	public function destroy_linkedin_session() {
-		session_destroy();
+            error_log(destroy_linkedin_session);
+            //session_destroy();
 	}
 	
 	public function render_shortcode($atts) {

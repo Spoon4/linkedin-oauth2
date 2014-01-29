@@ -58,6 +58,6 @@ function get_linkedin_profile($token, $memeberId = '~') {
 }
 
 function post_linkedin_share($token, $data) {
-	$share = new LinkedInShare($token);
-	return $share->share($postId);
+    	$share = new LinkedInShare($token);
+        return $share->share($data);
 }

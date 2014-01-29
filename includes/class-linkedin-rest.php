@@ -85,7 +85,7 @@ abstract class LinkedInRest
 	protected function call($method, $args, $headers=array()) {
 		$response = null;
 		$api_url = $this->getServiceURL();
-		
+
 		add_filter('https_ssl_verify', '__return_false');
 		
 		if('post' == strtolower($method)) {
