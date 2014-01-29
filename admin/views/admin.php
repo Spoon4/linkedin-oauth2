@@ -40,6 +40,12 @@
 				<td><input type="text" name="api_secret_key" value="<?php echo get_option( 'LINKEDIN_API_SECRET_KEY', '' ); ?>" size="70" class="regular-text"></td>
 			</tr>
 		</table>
+<<<<<<< HEAD
+=======
+		<p class="submit">
+			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save')?>">
+		</p>
+>>>>>>> c895fee7ef5f89ed9d1d7c1e4f782e4a2b93c35f
 		<br/>
 		<small><?php _e('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here</a>')?></small>
 	</form>

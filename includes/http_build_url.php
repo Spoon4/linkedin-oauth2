@@ -1,6 +1,7 @@
 <?php
 /**
  * Constants usable with http_build_url()
+ *
  * @link http://php.net/manual/en/http.constants.php#constant.http-url-replace
  */
 defined('HTTP_URL_REPLACE')        or define('HTTP_URL_REPLACE',        0);
@@ -15,16 +16,16 @@ defined('HTTP_URL_STRIP_QUERY')    or define('HTTP_URL_STRIP_QUERY',    128);
 defined('HTTP_URL_STRIP_FRAGMENT') or define('HTTP_URL_STRIP_FRAGMENT', 256);
 defined('HTTP_URL_STRIP_ALL')      or define('HTTP_URL_STRIP_ALL',      492);
 
-
+/**
+ * Build query string
+ *
+ * @link http://php.net/manual/en/function.http-build-str.php
+ * @param array $query associative array of query string parameters
+ * @param string $prefix top level prefix
+ * @param string $arg_separator argument separator to use (by default the INI setting arg_separator.output will be used, or "&" if neither is set
+ * @return string Returns the built query as string on success or FALSE on failure. 
+ */
 if ( ! function_exists('http_build_str')) :
-	/**
-	 * Build query string
-	 * @link http://php.net/manual/en/function.http-build-str.php
-	 * @param array $query associative array of query string parameters
-	 * @param string $prefix top level prefix
-	 * @param string $arg_separator argument separator to use (by default the INI setting arg_separator.output will be used, or "&" if neither is set
-	 * @return string Returns the built query as string on success or FALSE on failure. 
-	 */
 	function http_build_str(array $query, $prefix = '', $arg_separator = null)
 	{
 		if (is_null($arg_separator)) $arg_separator = ini_get('arg_separator.output');
@@ -44,17 +45,16 @@ if ( ! function_exists('http_build_str')) :
 	}
 endif;
 
-
+/**
+ * Build a URL
+ * @link http://php.net/manual/en/function.http-build-url.php
+ * @param mixed $url (part(s) of) an URL in form of a string or associative array like parse_url() returns
+ * @param mixed $parts same as the first argument
+ * @param integer $flags a bitmask of binary or'ed HTTP_URL constants; HTTP_URL_REPLACE is the default
+ * @param array $new_url if set, it will be filled with the parts of the composed url like parse_url() would return
+ * @return string Returns the new URL as string on success or FALSE on failure.
+ */
 if ( ! function_exists('http_build_url')) :
-	/**
-	 * Build a URL
-	 * @link http://php.net/manual/en/function.http-build-url.php
-	 * @param mixed $url (part(s) of) an URL in form of a string or associative array like parse_url() returns
-	 * @param mixed $parts same as the first argument
-	 * @param integer $flags a bitmask of binary or'ed HTTP_URL constants; HTTP_URL_REPLACE is the default
-	 * @param array $new_url if set, it will be filled with the parts of the composed url like parse_url() would return
-	 * @return string Returns the new URL as string on success or FALSE on failure.
-	 */
 	function http_build_url($url = array(), $parts = array(), $flags = HTTP_URL_REPLACE, &$new_url = null)
 	{
 		$defaults = array(
