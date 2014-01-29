@@ -82,7 +82,7 @@ class LinkedInShare extends LinkedInRest
 		$body->visibility->code = $this->isValid($data['visibility']['code']) ? $data['visibility']['code'] : LinkedInShareVisibility::ANYONE;
 		
 		$json = json_encode($body);
-		return  $this->post($json, array(
+		return $this->post($json, array(
 		    "Content-Type" => "application/json",
 		    "x-li-format" => "json"
 		));
@@ -101,7 +101,8 @@ class LinkedInShare extends LinkedInRest
  	 * @since    1.0.0
 	 */
 	private function isValid($value) {
-            if(is_null($value) || !isset($value))
+        if(!is_null($value) || isset($value))
+			return false;
 		if(is_string($value))
 			return ('' !== $value);
 		if(is_numeric($value))

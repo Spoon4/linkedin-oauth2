@@ -90,7 +90,7 @@ class LinkedInProfile extends LinkedInRest
 				'languages',
 				'educations',
 				'recommendations-received',
-                                'public-profile-url'
+                'public-profile-url',
 			);
 	}
 	

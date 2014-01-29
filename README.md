@@ -51,17 +51,6 @@ e.g.
 
 ## Recommended Tools
 
-### Localization Tools
-
-The LinkedIn OAuth2 plugin uses a variable to store the text domain used when internationalizing strings. To take advantage of this method,
-there are tools that are recommended for providing correct, translatable files:
-
-* [Poedit](http://www.poedit.net/)
-* [makepot](http://i18n.svn.wordpress.org/tools/trunk/)
-* [i18n](https://github.com/grappler/i18n)
-
-Any of the above tools should provide you with the proper tooling to localize strings.
-
 ### GitHub Updater
 
 This plugin supports the [GitHub Updater](https://github.com/afragen/github-updater) plugin, so if you install that, this plugin becomes automatically updateable direct from GitHub. Any submission to WP.org repo will make this redundant.

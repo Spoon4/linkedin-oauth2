@@ -1,8 +1,9 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
 
 .linkedin-btn {
-    background-image: url(../images/linkedin-signin-button.png) ;
-     height: 30px;
-   width: 199px;
-    display:block;
+	background: url(../images/linkedin-signin-button.png) no-repeat ;
+	height: 30px;
+	width: 199px;
+	margin: 0 auto;
+	display:block;
 }
