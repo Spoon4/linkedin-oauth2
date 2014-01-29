@@ -28,10 +28,10 @@ function format_linkedin_date($seconds_count){
     $seconds    = $seconds_count % 60;
     $seconds_count = $seconds_count - (60 * $seconds);
 
-    $seconds  = (str_pad($seconds,  2, "0", STR_PAD_LEFT)  . __('s')       );
-    $minutes  = (str_pad($minutes,  2, "0", STR_PAD_LEFT)  . __('min')     );
-    $hours    = (str_pad($hours,    2, "0", STR_PAD_LEFT)  . __('h')       );
-    $days     = (str_pad($days,     2, "0", STR_PAD_LEFT)  . __(' jours')  );
+    $seconds  = (str_pad($seconds,  2, "0", STR_PAD_LEFT)  . __('s')         );
+    $minutes  = (str_pad($minutes,  2, "0", STR_PAD_LEFT)  . __('min')       );
+    $hours    = (str_pad($hours,    2, "0", STR_PAD_LEFT)  . __('h')         );
+    $days     = (str_pad($days,     2, "0", STR_PAD_LEFT)  . ' ' . __('days'));
 
     return "$days $hours$minutes$seconds";
 }

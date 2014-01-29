@@ -2,30 +2,92 @@
 # This file is distributed under the same license as the TODO package.
 msgid ""
 msgstr ""
-"Project-Id-Version: TODO 1.0.0\n"
+"Project-Id-Version: linkedin-oauth2 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/linkedin-oauth2\n"
-"POT-Creation-Date: 2013-05-10 11:23:19+00:00\n"
-"PO-Revision-Date: 2013-05-10 10:37-0500\n"
-"Last-Translator: Spoon <spoon4@gmail.com>\n"
-"Language-Team: LANGUAGE <translations@example.com >\n"
+"POT-Creation-Date: 2014-01-28 15:04+0100\n"
+"PO-Revision-Date: 2014-01-28 15:05+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spoon4\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
 "esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
 "X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class-linkedin-oauth2-admin.php:171
+#: admin/class-linkedin-oauth2-admin.php:169
 msgid "LinkedIn Options"
-msgstr ""
+msgstr "Options LinkedIn"
 
-#: class-linkedin-oauth2-admin.php:172
+#: admin/class-linkedin-oauth2-admin.php:170
 msgid "LinkedIn"
-msgstr ""
+msgstr "LinkedIn"
 
-#: class-linkedin-oauth2-admin.php:198
+#: admin/class-linkedin-oauth2-admin.php:196
 msgid "Settings"
+msgstr "Configuration"
+
+#: admin/views/admin.php:22
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Vous n'avez pas les droits suffisants pour accéder à cette page."
+
+#: admin/views/admin.php:35
+msgid "API Key"
+msgstr "Clé d'API"
+
+#: admin/views/admin.php:39
+msgid "Consumer Secret"
+msgstr "Clé secrète"
+
+#: admin/views/admin.php:44
+msgid "Authentication Token: "
+msgstr "Jeton d'authentification : "
+
+#: admin/views/admin.php:50
+msgid "Save"
+msgstr "Enregistrer"
+
+#: admin/views/admin.php:56
+#, fuzzy
+msgid ""
+"You can sign up for a API key <a href=\"https://developer.linkedin.com/\" "
+"target=\"_blank\">here</a>"
 msgstr ""
+"Vous pouvez vous enregistrer pour obtenir une clé d'API <a href=\"https://"
+"developer.linkedin.com/\" target=\"_blank\">ici</a>"
+
+#: includes/class-linkedin-share.php:122
+msgid "Share must contain, at least, comment and/or title/submitted-url"
+msgstr "Un partage doit contenir, au moins, comment et/ou title/submitted-url"
+
+#: includes/class-linkedin-share.php:125
+msgid "Share must contain both title and submitted-url when comment is null"
+msgstr "Un partage doit contenir title ET submitted-url si comment est null"
+
+#: public/includes/functions.php:31
+msgid "s"
+msgstr "s"
+
+#: public/includes/functions.php:32
+msgid "min"
+msgstr "min"
+
+#: public/includes/functions.php:33
+msgid "h"
+msgstr "h"
+
+#: public/includes/functions.php:34
+msgid "days"
+msgstr "jours"
+
+#: public/includes/functions.php:48
+msgid "Authenticate"
+msgstr "S'identifier"
+
+#~ msgid " jours"
+#~ msgstr "jours"

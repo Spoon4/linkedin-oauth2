@@ -53,6 +53,6 @@
 			<?php endif;?>
 		</p>
 		<br/>
-		<small><?php _e('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here')?></a></small>
+		<small><?php _e('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here</a>')?></small>
 	</form>
 </div>
