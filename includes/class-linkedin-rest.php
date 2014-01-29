@@ -1,19 +1,19 @@
 <?php
 /**
+ * Base class for REST API calls.
+ *
+ * @abstract
+ *
  * @package   LinkedInRest
  * @author    Spoon <spoon4@gmail.com>
  * @license   GPL-2.0+
  * @link      https://github.com/Spoon4/linkedin-oauth2
+ * @link      http://developer.linkedin.com/documents/reading-data
+ * @link      http://developer.linkedin.com/documents/using-url-query-parameters
+ * @link      http://developer.linkedin.com/documents/writing-linkedin-apis
+ * @link      http://developer.linkedin.com/documents/request-and-response-headers
  * @copyright 2014 Spoon
- */
-/**
- * Base class for REST API calls.
  *
- * @abstract
- * @see http://developer.linkedin.com/documents/reading-data
- * @see http://developer.linkedin.com/documents/using-url-query-parameters
- * @see http://developer.linkedin.com/documents/writing-linkedin-apis
- * @see http://developer.linkedin.com/documents/request-and-response-headers
  *
  * @since    1.0.0
  */
@@ -27,8 +27,8 @@ abstract class LinkedInRest
 	/**
 	 * Constructor
 	 *
-	 * @param string $token An authentication valid token.
-	 * @param string $url The base URL of the service call.
+	 * @param string $token An authentication valid token
+	 * @param string $url The base URL of the service call
  	 *
  	 * @since    1.0.0
 	 */
@@ -77,12 +77,12 @@ abstract class LinkedInRest
 	 * Execute a LinkedIn API call from service URL.
 	 *
 	 * @param string $method The request method GET|POST.
-	 * @param mixed $arg Optional request parameters (used only for POST method).
+	 * @param mixed $params Optional request parameters (used only for POST method).
 	 * @param array $headers HTTP request headers.
  	 *
  	 * @since    1.0.0
 	 */
-	protected function call($method, $args, $headers=array()) {
+	protected function call($method, $params, $headers = array()) {
 		$response = null;
 		$api_url = $this->getServiceURL();
 
@@ -94,11 +94,12 @@ abstract class LinkedInRest
 				'httpversion' => '1.1',
 				'blocking'    => true,
 				'headers'     => $headers,
-				'body'        => $args
+				'body'        => $params
 			));
 		} elseif('get' == strtolower($method)) {		
 			$response = wp_remote_get($api_url, array(
 				'headers'    => $headers,
+				'body'       => $params,
 			));
 		} else {
 			return null;
@@ -107,19 +108,20 @@ abstract class LinkedInRest
 		if(is_wp_error($response))
 			return $response->get_error_message();
 		else
-			return json_decode($response['body']);
+			return json_decode(wp_remote_retrieve_body($response));
 	}
 	
 	/**
 	 * Execute a GET API request.
 	 *
+	 * @param mixed $params POST request data.
 	 * @param array $headers HTTP request headers.
 	 * @return string The response.
  	 *
  	 * @since    1.0.0
 	 */
-	public function get($headers=array()) {
-		return $this->call('get', null, $headers);
+	public function get($params = null, $headers = array()) {
+		return $this->call('get', $params, $headers);
 	}
 	
 	/**
@@ -131,7 +133,7 @@ abstract class LinkedInRest
  	 *
  	 * @since    1.0.0
 	 */
-	public function post($params, $headers=array()) {
+	public function post($params, $headers = array()) {
 		return $this->call('post', $params, $headers);
 	}
 	

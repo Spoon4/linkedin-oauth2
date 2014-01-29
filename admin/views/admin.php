@@ -39,18 +39,9 @@
 				<th scope="row"><label for="api_secret_key"><?php _e('Consumer Secret')?><span class="required"> (*)</span>: </label></th>
 				<td><input type="text" name="api_secret_key" value="<?php echo get_option( 'LINKEDIN_API_SECRET_KEY', '' ); ?>" size="70" class="regular-text"></td>
 			</tr>
-			<?php if(!is_null(get_linkedin_token())):?>
-			<tr valign="row">
-				<th scope="row"><label for="api_secret_key"><?php _e('Authentication Token: ')?></label></th>
-				<td><?php echo get_linkedin_token(); ?></td>
-			</tr>
-			<?php endif;?>
 		</table>
 		<p class="submit">
 			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save')?>">
-			<?php if(!is_linkedin_user_connected()):?>
-				<?php linkedin_link();?>
-			<?php endif;?>
 		</p>
 		<br/>
 		<small><?php _e('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here')?></a></small>

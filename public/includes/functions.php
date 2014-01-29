@@ -44,16 +44,15 @@ function format_linkedin_date($seconds_count){
  * @since    1.0.0
  */
 function linkedin_link($label = null) {
-	if(is_null($label)) {
-		$label = __('Authenticate');
-	}
-	?>
-		<a class="linkedin-btn" type="button" href="<?php echo get_linkedin_authorization_url(); ?>"><?php echo $label?></a>
-	<?php
+?>
+	<a class="linkedin-btn" type="button" href="<?php echo get_linkedin_authorization_url(); ?>">
+		<?php echo is_null($label) ? __('Authenticate') : $label?>
+	</a>
+<?php
 }
 
-function get_linkedin_profile($token, $memeberId = '~') {
-	$profile = new LinkedInProfile($token, $memeberId);
+function get_linkedin_profile($token, $member = '~', $fields = array(), $secure = false) {
+	$profile = new LinkedInProfile($token, $member, $fields, $secure);
 	return $profile->get();
 }
 

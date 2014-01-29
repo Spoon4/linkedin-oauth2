@@ -4,12 +4,10 @@
  * @author    Spoon <spoon4@gmail.com>
  * @license   GPL-2.0+
  * @link      https://github.com/Spoon4/linkedin-oauth2
+ * @link      http://developer.linkedin.com/documents/commenting-reading-comments-and-likes-network-updates
+ * @link      http://developer.linkedin.com/documents/get-network-updates-and-statistics-api
+ * @link      http://developer.linkedin.com/documents/post-network-update
  * @copyright 2014 Spoon
- */
-/**
- * @see http://developer.linkedin.com/documents/commenting-reading-comments-and-likes-network-updates
- * @see http://developer.linkedin.com/documents/get-network-updates-and-statistics-api
- * @see http://developer.linkedin.com/documents/post-network-update
  *
  * @since    1.0.0
  */
