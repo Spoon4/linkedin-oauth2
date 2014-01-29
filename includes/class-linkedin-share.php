@@ -34,7 +34,7 @@ class LinkedInShare extends LinkedInRest
  	 * @since    1.0.0
 	 */
 	public function __construct($token) {
-		parent::__construct($token, "/people/~/network/shares");
+		parent::__construct($token, "/people/~/shares");
 	}
 	
 	/**
@@ -61,29 +61,28 @@ class LinkedInShare extends LinkedInRest
 		if($error = $this->requirements($data)) {
 			return $error;
 		}
-		
+                    
 		$body = new stdClass();
 		
 		if($this->isValid($data['comment']))
 			$body->comment = $data['comment'];
+
+        $body->content = new stdClass();
 		
-		$body->content = new stdClass();
-		
-		if($this->isValid($data['title']))
-			$body->content->title = $data['title'];
-		if($this->isValid($data['submitted-url']))
-			$body->content->{'submitted-url'} = $data['submitted-url'];
-		if($this->isValid($data['submitted-image-url']))
-			$body->content->{'submitted-image-url'} = $data['submitted-image-url'];
-		if($this->isValid($data['description']))
-			$body->content->description = $data['description'];
+		if($this->isValid($data['content']['title']))
+			$body->content->title = $data['content']['title'];
+		if($this->isValid($data['content']['submitted-url']))
+			$body->content->{'submitted-url'} = $data['content']['submitted-url'];
+		if($this->isValid($data['content']['submitted-image-url']))
+			$body->content->{'submitted-image-url'} = $data['content']['submitted-image-url'];
+		if($this->isValid($data['content']['description']))
+			$body->content->description = $data['content']['description'];
 		
 		$body->visibility = new stdClass();
-		$body->visibility->code = $this->isValid($data['visibility']) ? $data['visibility'] : LinkedInShareVisibility::ANYONE;
+		$body->visibility->code = $this->isValid($data['visibility']['code']) ? $data['visibility']['code'] : LinkedInShareVisibility::ANYONE;
 		
 		$json = json_encode($body);
-		
-		return $this->post($json, array(
+		return  $this->post($json, array(
 		    "Content-Type" => "application/json",
 		    "x-li-format" => "json"
 		));
@@ -102,10 +101,9 @@ class LinkedInShare extends LinkedInRest
  	 * @since    1.0.0
 	 */
 	private function isValid($value) {
-		if(is_null($value) || isset($value))
-			return false;
+            if(is_null($value) || !isset($value))
 		if(is_string($value))
-			return '' !== $value;
+			return ('' !== $value);
 		if(is_numeric($value))
 			return $value != 0;
 		else
@@ -121,10 +119,10 @@ class LinkedInShare extends LinkedInRest
  	 * @since    1.0.0
 	 */
 	private function requirements($data) {
-		if(!$this->isValid($data['title']) && !$this->isValid($data['submitted-url']) && !$this->isValid($data['comment'])) {
+                if(!$this->isValid($data['content']['title']) && !$this->isValid($data['content']['submitted-url']) && !$this->isValid($data['comment'])) {
 			return new WP_Error('share_assertion_required', __('Share must contain, at least, comment and/or title/submitted-url'));
 		}
-		if(!$this->isValid($data['comment']) && ($this->isValid($data['title']) || $this->isValid($data['submitted-url']))) {
+		if(!$this->isValid($data['comment']) && ($this->isValid($data['content']['title']) || $this->isValid($data['content']['submitted-url']))) {
 			return new WP_Error('share_assertion_required_content', __('Share must contain both title and submitted-url when comment is null'));
 		}
 		return null;

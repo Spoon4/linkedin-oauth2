@@ -12,4 +12,4 @@
  * @copyright 2014 Spoon
  */
 ?>
-<?php check_linkedin_authorization_code();?>
+<?php //check_linkedin_authorization_code();?>
