@@ -206,7 +206,7 @@ function get_linkedin_authorization_url($scope='r_basicprofile') {
  */
 function clear_linkedin_data() {
     if(session_id()) {
-        session_destroy();
+		$_SESSION['linkedin_session_data'] = null;
     }
 }
 
