@@ -120,7 +120,7 @@ class LinkedInShare extends LinkedInRest
  	 * @since    1.0.0
 	 */
 	private function requirements($data) {
-                if(!$this->isValid($data['content']['title']) && !$this->isValid($data['content']['submitted-url']) && !$this->isValid($data['comment'])) {
+        if(!$this->isValid($data['content']['title']) && !$this->isValid($data['content']['submitted-url']) && !$this->isValid($data['comment'])) {
 			return new WP_Error('share_assertion_required', __('Share must contain, at least, comment and/or title/submitted-url'));
 		}
 		if(!$this->isValid($data['comment']) && ($this->isValid($data['content']['title']) || $this->isValid($data['content']['submitted-url']))) {
