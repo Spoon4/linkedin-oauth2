@@ -14,7 +14,6 @@
  * @link      http://developer.linkedin.com/documents/request-and-response-headers
  * @copyright 2014 Spoon
  *
- *
  * @since    1.0.0
  */
 abstract class LinkedInRest 
@@ -36,7 +35,7 @@ abstract class LinkedInRest
 		$this->url = LINKEDIN_QUERY_URL . $url;
 		$this->token = $token;
 		$this->addParameter('access_token', $this->token);
-		$this->addParameter('format', 'json');
+		$this->addParameter('format', $this->format);
 	}
 	
 	/**
@@ -104,9 +103,10 @@ abstract class LinkedInRest
 		} else {
 			return null;
 		}
-				
+		
+		
 		if(is_wp_error($response))
-			return $response->get_error_message();
+			return $response;
 		else
 			return json_decode(wp_remote_retrieve_body($response));
 	}

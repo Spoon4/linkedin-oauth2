@@ -55,8 +55,6 @@ class LinkedIn_OAuth2 {
 		
 		// PHP session management
 		add_action( 'init', array( $this, 'start_linkedin_session'), 1 );
-		add_action( 'wp_logout', array( $this, 'destroy_linkedin_session' ) );
-		add_action( 'wp_login', array( $this, 'destroy_linkedin_session' ) );
 		
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -250,8 +248,10 @@ class LinkedIn_OAuth2 {
 
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+//		$file = trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo';
+		$file = trailingslashit(WP_PLUGIN_DIR) . "$domain/languages/$locale.mo";
 
-		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+		load_textdomain($domain, $file);
 
 	}
 
@@ -309,106 +309,4 @@ class LinkedIn_OAuth2 {
 			session_start();
 		}
 	}
-
-	/**
-	 * Destroy existing PHP session.
-	 *
-	 * @since    1.0.0
-	 */
-	public function destroy_linkedin_session() {
-            error_log(destroy_linkedin_session);
-            //session_destroy();
-	}
-	
-	public function render_shortcode($atts) {
-		$return = '';
-	
-		extract( shortcode_atts( array('id' => 'linkedin-1'), $atts ) );
-	
-		$token = get_linkedin_token();
-	
-		if($token) {
-			add_filter('https_ssl_verify', '__return_false');
-			$api_url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,industry,summary,positions,picture-url,skills,languages,educations,recommendations-received)?oauth2_access_token=$token&format=json";
-		
-			$response = wp_remote_get( $api_url );
-		
-			$json = json_decode( $response['body'] );
-		
-			$return .= '<section class="shortcuts">';
-			$return .= '<h2><a href="#shortcuts">Quick links</a></h2>';
-			$return .= '<ul>';
-			$return .= '<li><a href="#skills">Skills</a></li>';
-			$return .= '<li><a href="#summary">Summary</a></li>';
-			$return .= '<li><a href="#positions">Positions</a></li>';
-			$return .= '<li><a href="#recommendations">Recommendations</a></li>';
-			$return .= '</ul>';
-			$return .= '</section>';
-		
-			$return .= '<section class="about">';
-			$return .= '<h2>' . $json->{'firstName'} . ' ' . $json->{'lastName'} . '</h2>';
-			$return .= '<p>' . $json->{'headline'} . '</p>';
-			$return .= '</section>';
-		
-			$skills = $json->{'skills'}->{'values'};
-			$first = true;
-			$return .= '<section class="skills">';
-			$return .= '<h2><a href="#" name="skills">Skills</a></h2>';
-			$return .= '<pre style="font-size: smaller;">';
-		
-			if($skills && !empty($skills)) {
-				foreach($skills as $i => $skill) {
-					$return .= ( $first == false ? ', ' : '') . $skill->{'skill'}->{'name'};
-					$first = false;
-				}
-			}
-			$return .= '</pre>';
-			$return .= '<h2><a href="#" name="summary">Summary</a></h2>';
-			$return .= '<pre>' . $json->{'summary'} . '</pre>';
-			$return .= '</section>';
-		
-			$jobs = $json->{'positions'}->{'values'};
-			$return .= '<section class="positions">';
-			$return .= '<h2><a href="#" name="positions">Positions - ' . $json->{'industry'} . '</a></h2>';
-			$return .= '<p>';
-		
-			if($jobs && !empty($jobs)) {
-				foreach($jobs as $i => $job) {
-					$return .= '<h2>' . $job->{'title'} . '</h2>';
-					$return .= '<h3>' . $job->{'company'}->{'name'};
-					$return .= ' ( ' . $job->{'startDate'}->{'year'} . ' - ';
-					if($job->{'isCurrent'} == "true"){
-						$return .= 'Current';
-					} else {
-						$return .= $job->{'endDate'}->{'year'};
-					}
-					$return .= ' )</h3>';
-					$return .= '<pre>' . $job->{'summary'} . '</pre>';
-
-				}
-			}
-
-			$return .= '</p>';
-			$return .= '</section>';
-		
-			$recommendations = $json->{'recommendationsReceived'}->{'values'};
-			$return .= '<section class="recommendations">';
-			$return .= '<h2><a href="#" name="recommendations">Recommendations</a></h2>';
-		
-
-			if($recommendations && !empty($recommendations)) {
-				foreach($recommendations as $i => $recommendation) {
-					$recommendedBy = $recommendation->{'recommender'};
-					$return .= '<h3>' . $recommendedBy->{'firstName'} . ' ' . $recommendedBy->{'lastName'} . '</h3>';
-					$return .= '<blockquote>';
-					$return .= $recommendation->{'recommendationText'};				
-					$return .= '</blockquote>';
-				}			
-			}
-			$return .= '</section>';
-
-			return $return;
-		}
-	}
-
 }
