@@ -44,6 +44,6 @@
 			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save')?>">
 		</p>
 		<br/>
-		<small><?php _e('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here')?></a></small>
+		<small><?php _e('You can sign up for a API key <a href="https://developer.linkedin.com/" target="_blank">here</a>')?></small>
 	</form>
 </div>

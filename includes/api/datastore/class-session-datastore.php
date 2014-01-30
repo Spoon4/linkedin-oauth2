@@ -90,7 +90,7 @@ class SessionDataStore extends LinkedInDataStore
 	 */
 	static public function destroySession()
 	{
-		session_destroy();
+		$_SESSION[self::SESSION_KEY] = null;
 	}
 
 }

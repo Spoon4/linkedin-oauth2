@@ -55,8 +55,6 @@ class LinkedIn_OAuth2 {
 		
 		// PHP session management
 		add_action( 'init', array( $this, 'start_linkedin_session'), 1 );
-		add_action( 'wp_logout', array( $this, 'destroy_linkedin_session' ) );
-		add_action( 'wp_login', array( $this, 'destroy_linkedin_session' ) );
 		
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -250,8 +248,10 @@ class LinkedIn_OAuth2 {
 
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+//		$file = trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo';
+		$file = trailingslashit(WP_PLUGIN_DIR) . "$domain/languages/$locale.mo";
 
-		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+		load_textdomain($domain, $file);
 
 	}
 
@@ -306,14 +306,5 @@ class LinkedIn_OAuth2 {
 	 */
 	public function start_linkedin_session() {
 		SessionDataStore::createSession();
-	}
-
-	/**
-	 * Destroy existing PHP session.
-	 *
-	 * @since    1.0.0
-	 */
-	public function destroy_linkedin_session() {
-		SessionDataStore::destroySession();
 	}
 }

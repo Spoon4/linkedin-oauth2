@@ -35,7 +35,7 @@ abstract class LinkedInRest
 		$this->url = LINKEDIN_QUERY_URL . $url;
 		$this->token = $token;
 		$this->addParameter('access_token', $this->token);
-		$this->addParameter('format', 'json');
+		$this->addParameter('format', $this->format);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ abstract class LinkedInRest
 	protected function call($method, $params, $headers = array()) {
 		$response = null;
 		$api_url = $this->getServiceURL();
-		
+
 		add_filter('https_ssl_verify', '__return_false');
 		
 		if('post' == strtolower($method)) {
@@ -103,9 +103,10 @@ abstract class LinkedInRest
 		} else {
 			return null;
 		}
-				
+		
+		
 		if(is_wp_error($response))
-			return $response->get_error_message();
+			return $response;
 		else
 			return json_decode(wp_remote_retrieve_body($response));
 	}
