@@ -61,8 +61,13 @@ class LinkedInUser
 		return isset($this->data[$property]);
 	}
 	
-	public function __sleep()
+	// public function __sleep()
+	// {
+	// 	return array_merge(array('token'), array_keys($this->data));
+	// }
+	
+	public function __toString()
 	{
-		return array_merge(array('token'), array_keys($this->data));
+		return "{token: $this->token, data: [".join(', ', $this->data)."]}";
 	}
 }

@@ -12,7 +12,7 @@
  *------------------------------------------------------------------------------------*/
 
 function create_datastore() {
-	return new SessionDataStore();
+	return SessionDataStore::getInstance();
 }
 
 function get_linkedin_datastore() {
@@ -35,6 +35,7 @@ function set_linkedin_oauth_data($response) {
 		get_linkedin_datastore()->setData($response);
 		get_linkedin_datastore()->commit();
 	} catch(DataStoreException $exeption) {
+		error_log($exeption);
 		//TODO: set WP_Error for front
 	}
 /*	
@@ -65,7 +66,7 @@ function set_linkedin_oauth_data($response) {
  * @since    1.0.0
  */
 function get_linkedin_oauth_data() {
-	$data = get_linkedin_datastore()->getUser();
+	$data = get_linkedin_datastore()->getData();
 /*	
 	if(isset($_SESSION['linkedin_session_data'])) {
 		return maybe_unserialize($_SESSION['linkedin_session_data']);
@@ -105,8 +106,7 @@ function is_linkedin_user_connected() {
  * @since    1.0.0
  */
 function is_linkedin_token_valid() {
-	$user = get_linkedin_oauth_data();
-	return $user && $user->isValid();
+	return get_linkedin_token()->isValid();
 /*	
 	if(!empty($data) && isset($data['access_token']) && isset($data['expires_at'])) {
 		return $data['expires_at'] !== '' && time() < $data['expires_at'];
@@ -161,7 +161,7 @@ function check_linkedin_authorization_code() {
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
 
 	if ( $_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['code'])) {
-
+		get_linkedin_datastore()->clear();
 		$args = array(
 			'method'      => 'POST',
 			'httpversion' => '1.1',
@@ -195,19 +195,13 @@ function check_linkedin_authorization_code() {
 /**
  * Retreive saved token of user if connected and valid.
  *
- * @return string The access token
+ * @return LinkedInToken The access token object
  *
  * @since    1.0.0
  */
 function get_linkedin_token() {
 	if(is_linkedin_user_connected() && is_linkedin_token_valid()) {
 		return get_linkedin_datastore()->getToken();
-	/*	
-		$data = get_linkedin_oauth_data();
-		if(isset($data['access_token'])) {
-			return $data['access_token'];
-		}
-	*/	
 	}
 	return null;
 }
@@ -245,11 +239,6 @@ function get_linkedin_authorization_url($scope='r_basicprofile') {
  */
 function clear_linkedin_data() {
 	get_linkedin_datastore()->clear();
-/*	
-	if(session_id()) {
-		$_SESSION['linkedin_session_data'] = null;
-	}
-*/	
 }
 
 /**

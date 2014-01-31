@@ -19,7 +19,7 @@ abstract class LinkedInDataStore
 	
 	abstract public function setData($data);
 	
-	abstract public function getUser();
+	abstract public function getData();
 	
 	abstract public function exists();
 	

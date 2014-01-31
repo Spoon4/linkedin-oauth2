@@ -54,4 +54,9 @@ class LinkedInToken
 	{
 		return $this->expiresAt;
 	}
+	
+	public function __toString()
+	{
+		return $this->token;
+	}
 }
