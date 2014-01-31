@@ -49,6 +49,7 @@ class SessionDataStore implements LinkedInDataStore
 
 		return self::$instance;
 	}
+	
 	public function setToken(LinkedInToken $token)
 	{
 		if(!$this->user)
@@ -77,7 +78,6 @@ class SessionDataStore implements LinkedInDataStore
 	public function setData($data)
 	{
 		if(isset($data->error)) {
-error_log("setData (error): $data->error");
 			throw new DataStoreException($data->error, $data->error_description);
 		} else {
 			$token = new LinkedInToken($data->access_token);

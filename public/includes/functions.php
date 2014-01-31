@@ -43,7 +43,7 @@ function format_linkedin_date($seconds_count) {
  *
  * @since    1.0.0
  */
-function linkedin_link($label = null, $scope = "r_fullprofile rw_nus") {
+function linkedin_link($label = null, $scope = "r_basicprofile") {
 ?>
 	<a class="linkedin-btn" type="button" href="<?php echo get_linkedin_authorization_url($scope); ?>">
 		<?php echo is_null($label) ? __('Authenticate') : $label?>
