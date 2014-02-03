@@ -32,7 +32,7 @@ function get_linkedin_datastore() {
  */
 function set_linkedin_oauth_data($response) {
 	try {
-		get_linkedin_datastore()->setData($response);
+		get_linkedin_datastore()->parseResponse($response);
 		get_linkedin_datastore()->commit();
 	} catch(DataStoreException $exeption) {
 		error_log($exeption);

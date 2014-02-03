@@ -7,7 +7,7 @@
  *
  * @since    1.1.0
  */
-class LinkedInUser
+class LinkedInData
 {
 	private $token;
 	private $data = array();
@@ -37,9 +37,19 @@ class LinkedInUser
 		return $this->token;
 	}
 	
-	public function setProperties(array $data)
+	public function setData(array $data)
 	{
-		$this->data = $data;
+		$this->data = array_merge($this->data, $data);
+	}
+	
+	public function getData($key)
+	{
+		return $this->data[$key];
+	}
+	
+	public function addData($key, $value)
+	{
+		$this->data[$key] = $value;
 	}
 	
 	public function __set($property, $value)
@@ -69,5 +79,10 @@ class LinkedInUser
 	public function __toString()
 	{
 		return "{token: $this->token, data: [".join(', ', $this->data)."]}";
+	}
+	
+	public function serialize()
+	{
+		return serialize($this);
 	}
 }

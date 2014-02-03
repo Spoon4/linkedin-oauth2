@@ -20,9 +20,9 @@ class SessionDataStore implements LinkedInDataStore
 	 *
 	 * @since    1.1.0
 	 *
-	 * @var      LinkedInUser
+	 * @var      LinkedInData
 	 */
-	protected $user;
+	protected $data;
 	
 	/**
 	 * Instance of this class.
@@ -50,68 +50,90 @@ class SessionDataStore implements LinkedInDataStore
 		return self::$instance;
 	}
 	
-	public function setToken(LinkedInToken $token)
-	{
-		if(!$this->user)
-			$this->user = new LinkedInUser($token);
-		else
-			$this->user->setToken($token);
-	}
-	
-	public function getToken()
-	{
-		return $this->user->getToken();
-	}
-	
-	public function getData()
-	{
-		if(!$this->user && $this->exists()) {
-			$this->user = unserialize($_SESSION[self::SESSION_KEY]);
-		}
-		return $this->user;
-	}
-	
 	/**
-	 * @param object $data
+	 * 
+	 * @since    1.1.0
+	 *
+	 * @param object $response
 	 * @throws DataStoreException
 	 */
-	public function setData($data)
-	{
-		if(isset($data->error)) {
-			throw new DataStoreException($data->error, $data->error_description);
+	public function parseResponse($response) {
+		if(isset($response->error)) {
+			throw new DataStoreException($response->error, $response->error_description);
 		} else {
-			$token = new LinkedInToken($data->access_token);
-			$token->setExpiresIn($data->expires_in);
-			$token->setExpiresAt(time() + $data->expires_in);
+			$token = new LinkedInToken($response->access_token);
+			$token->setExpiresIn($response->expires_in);
+			$token->setExpiresAt(time() + $response->expires_in);
 			
 			$this->setToken($token);
 		}
 	}
 	
-	public function setExtra($data) 
-	{
-		
+	/**
+	 * Set token
+	 *
+	 * @since    1.1.0
+	 *
+	 * @param LinkedInToken $token
+	 */
+	public function setToken(LinkedInToken $token) {
+		if(!$this->data)
+			$this->data = new LinkedInData($token);
+		else
+			$this->data->setToken($token);
 	}
 	
-	public function getExtra() 
-	{
-		
+	/**
+	 * Get token
+	 *
+	 * @since    1.1.0
+	 *
+	 * @return LinkedInToken
+	 */
+	public function getToken() {
+		return $this->data->getToken();
 	}
 	
-	public function exists()
-	{
+	/**
+	 * Get data
+	 *
+	 * @since    1.1.0
+	 *
+	 * @return LinkedInData
+	 */
+	public function getData() {
+		if(!$this->data && $this->exists()) {
+			$this->data = unserialize($_SESSION[self::SESSION_KEY]);
+		}
+		return $this->data;
+	}
+	
+	/**
+	 * 
+	 * @since    1.1.0
+	 *
+	 * @param object $data
+	 * @throws DataStoreException
+	 */
+	public function setData($data) {
+		if(isset($data->error)) {
+			throw new DataStoreException($data->error, $data->error_description);
+		} else {
+			$this->data->setData($data);
+		}
+	}
+	
+	public function exists() {
 		return isset($_SESSION[self::SESSION_KEY]) && !is_null($_SESSION[self::SESSION_KEY]);
 	}
 	
-	public function commit()
-	{
-		$_SESSION[self::SESSION_KEY] = serialize($this->user);
-//		$this->user = null;
+	public function commit() {
+		$_SESSION[self::SESSION_KEY] = $this->data->serialize();
+//		$this->data = null;
 	}
 	
-	public function clear()
-	{
-		$this->user = null;
+	public function clear() {
+		$this->data = null;
 		self::destroySession();
 	}
 	
@@ -122,8 +144,7 @@ class SessionDataStore implements LinkedInDataStore
 	 *
 	 * @static
 	 */
-	static public function createSession()
-	{
+	static public function createSession() {
 		if(!session_id()) {
 			session_start();
 		}
@@ -136,8 +157,7 @@ class SessionDataStore implements LinkedInDataStore
 	 *
 	 * @static
 	 */
-	static public function destroySession()
-	{
+	static public function destroySession() {
 		$_SESSION[self::SESSION_KEY] = null;
 		unset($_SESSION[self::SESSION_KEY]);
 	}

@@ -21,10 +21,6 @@ interface LinkedInDataStore
 	
 	function getData();
 	
-	function setExtra($data);
-	
-	function getExtra();
-	
 	function exists();
 	
 	function commit();
