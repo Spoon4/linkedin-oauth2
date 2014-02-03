@@ -11,10 +11,24 @@
  *  LinkedIn data store management
  *------------------------------------------------------------------------------------*/
 
+/**
+ * Crete a new data store.
+ *
+ * @return LinkedInDataStore
+ *
+ * @since    1.1.0
+ */
 function create_datastore() {
 	return SessionDataStore::getInstance();
 }
 
+/**
+ * Get current data store.
+ *
+ * @return LinkedInDataStore
+ *
+ * @since    1.1.0
+ */
 function get_linkedin_datastore() {
 	return create_datastore();
 }
@@ -38,24 +52,6 @@ function set_linkedin_oauth_data($response) {
 		error_log($exeption);
 		//TODO: set WP_Error for front
 	}
-/*	
-	if(isset($response->error)) {
-		$data = array(
-			'error'   => $response->error,
-			'message' => $response->error_description,
-		);
-	} else {
-		if(!is_linkedin_token_valid()) {
-			clear_linkedin_data();
-		}
-		$data = array(
-			'access_token' => $response->access_token,
-			'expires_in'   => $response->expires_in,
-			'expires_at'   => time() + $response->expires_in,
-		);
-	}
-	$_SESSION['linkedin_session_data'] = serialize($data);
-*/	
 }
 
 /**
@@ -67,13 +63,6 @@ function set_linkedin_oauth_data($response) {
  */
 function get_linkedin_oauth_data() {
 	return get_linkedin_datastore()->getData();
-/*	
-	if(isset($_SESSION['linkedin_session_data'])) {
-		return maybe_unserialize($_SESSION['linkedin_session_data']);
-	} else {
-		return array();
-	}
-*/	
 }
 
 /**
@@ -84,18 +73,8 @@ function get_linkedin_oauth_data() {
  * @since    1.0.0
  */
 function is_linkedin_user_connected() {
-	$user = get_linkedin_oauth_data();
-	return $user && !isset($user->error);
-/*	
 	$data = get_linkedin_oauth_data();
-	if($data && !empty($data)) {
-		if(isset($data['error']))
-			return false;
-		else
-			return true;
-	}
-	return false;
-*/	
+	return $data && !isset($data->error);
 }
 
 /**
@@ -107,12 +86,6 @@ function is_linkedin_user_connected() {
  */
 function is_linkedin_token_valid() {
 	return get_linkedin_token()->isValid();
-/*	
-	if(!empty($data) && isset($data['access_token']) && isset($data['expires_at'])) {
-		return $data['expires_at'] !== '' && time() < $data['expires_at'];
-	}
-	return false;
-*/	
 }
 
 /**
@@ -253,8 +226,6 @@ function linkedin_errors() {
 	
 	if(isset($data->error)) {
 		$error = new WP_Error($data->error, $data->error_description);
-//	if($data && isset($data['error'])) {
-//		$error = new WP_Error($data['error'], $data['message']);
 		clear_linkedin_data();
 		return $error;
 	}
