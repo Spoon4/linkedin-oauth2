@@ -3,8 +3,8 @@
 .linkedin-btn {
 	background: url(../images/linkedin-signin-button.png) no-repeat ;
 	height: 30px;
-	width: 199px;
-	margin: 0 auto;
+	width: 150px;
+	margin: 5px 0 0 6px ;
 	display:block;
+    text-indent: -9999px;
 }
-

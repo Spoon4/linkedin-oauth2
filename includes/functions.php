@@ -95,7 +95,7 @@ function is_linkedin_token_valid() {
 function get_linkedin_redirect_url() {
 	$url = 'http';
 	
-	if ($_SERVER["HTTPS"] == "on") {
+	if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
 		$url .= "s";
 	}
 	
