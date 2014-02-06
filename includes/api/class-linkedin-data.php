@@ -70,12 +70,7 @@ class LinkedInData
 	{
 		return isset($this->data[$property]);
 	}
-	
-	// public function __sleep()
-	// {
-	// 	return array_merge(array('token'), array_keys($this->data));
-	// }
-	
+
 	public function __toString()
 	{
 		return "{token: $this->token, data: [".join(', ', $this->data)."]}";
