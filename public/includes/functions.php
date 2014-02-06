@@ -62,7 +62,7 @@ function linkedin_link($label = null, $scope = "r_basicprofile") {
  *
  * @since    1.0.0
  */
-function get_linkedin_profile($token, $member = '~', $fields = array(), $secure = false) {
+function get_linkedin_profile($token, $member = LinkedInProfile::ME, $fields = array(), $secure = false) {
 	$profile = new LinkedInProfile($token, $member, $fields, $secure);
 	return $profile->get();
 }
