@@ -89,9 +89,14 @@ class SessionDataStore implements LinkedInDataStore
 	 * @since    1.1.0
 	 *
 	 * @return LinkedInToken
+	 * @throws LinkedInTokenException
 	 */
 	public function getToken() {
-		return $this->data->getToken();
+		if($this->exists() && $this->data) {
+			return $this->data;
+		} else {
+			throw new LinkedInTokenException('no_token', 'No LinkedIn token found');
+		}
 	}
 	
 	/**

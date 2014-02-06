@@ -40,6 +40,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/libs/http_build_url.php' )
 require_once( plugin_dir_path( __FILE__ ) . 'includes/libs/is_url.php' );
 
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/exceptions/class-linkedin-exception.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/api/exceptions/class-linkedin-token-exception.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/exceptions/class-datastore-exception.php' );
 
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/class-linkedin-token.php' );

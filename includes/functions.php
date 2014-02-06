@@ -73,8 +73,7 @@ function get_linkedin_oauth_data() {
  * @since    1.0.0
  */
 function is_linkedin_user_connected() {
-	$data = get_linkedin_oauth_data();
-	return $data && !isset($data->error);
+	return get_linkedin_datastore()->exists();
 }
 
 /**
@@ -85,7 +84,7 @@ function is_linkedin_user_connected() {
  * @since    1.0.0
  */
 function is_linkedin_token_valid() {
-	return get_linkedin_token()->isValid();
+	return get_linkedin_token() ? get_linkedin_token()->isValid() : false;
 }
 
 /**
@@ -173,10 +172,11 @@ function check_linkedin_authorization_code() {
  * @since    1.0.0
  */
 function get_linkedin_token() {
-	if(is_linkedin_user_connected() && is_linkedin_token_valid()) {
-		return get_linkedin_datastore()->getToken();
+	try {
+		return is_linkedin_user_connected() ? get_linkedin_datastore()->getToken() : null;
+	} catch(LinkedInTokenException $e) {
+		return null;
 	}
-	return null;
 }
 
 /**

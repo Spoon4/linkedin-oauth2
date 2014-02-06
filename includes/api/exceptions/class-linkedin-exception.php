@@ -12,9 +12,10 @@ class LinkedInException extends Exception
 	 * @param string $error
 	 * @param string $description
 	 */
-	public function __construct($error, $description)
+	public function __construct($error = null, $description = '')
 	{
-		$this->error = $error;
+		if(!is_null($error))
+			$this->error = $error;
 		parent::__construct($description);
 	}
 	
