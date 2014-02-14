@@ -57,7 +57,7 @@ class LinkedInProfile extends LinkedInRest
 	 *
 	 * @return string The resource parameter
  	 *
- 	 * @since    1.0.0
+ 	 * @since    1.1.0
 	 */
 	protected function getResource() {
 		if($this->member == self::ME)
@@ -74,7 +74,7 @@ class LinkedInProfile extends LinkedInRest
 	 *
 	 * @return array The list of fields
  	 *
- 	 * @since    1.0.0
+ 	 * @since    1.1.0
 	 */
 	private function getDefaultFields() {
 		return array(
@@ -99,7 +99,7 @@ class LinkedInProfile extends LinkedInRest
 	 *
 	 * @return string The formatted field list
  	 *
- 	 * @since    1.0.0
+ 	 * @since    1.1.0
 	 */
 	private function getFormattedFields() {
 		if($this->fields)
