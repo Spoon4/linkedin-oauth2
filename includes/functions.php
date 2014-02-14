@@ -110,12 +110,16 @@ function get_linkedin_redirect_url() {
 	$parts = parse_url($url);
 	parse_str($parts['query'], $params);
 	
-	if(isset($params['code']))
-		unset($params['code']);
-	if(isset($params['state']))
-		unset($params['state']);
+	if(isset($parts['query'])) {
+		parse_str($parts['query'], $params);
 	
-	$parts['query'] = http_build_query($params);
+		if(isset($params['code']))
+			unset($params['code']);
+		if(isset($params['state']))
+			unset($params['state']);
+	
+		$parts['query'] = http_build_query($params);
+	}
 	
 	return http_build_url($parts);
 }
