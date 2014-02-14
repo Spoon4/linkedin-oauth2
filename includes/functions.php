@@ -130,11 +130,15 @@ function get_linkedin_redirect_url() {
  *
  * @since    1.0.0
  */
-function check_linkedin_authorization_code() {
-	$redirect = get_linkedin_redirect_url();
+function check_linkedin_authorization_code($redirect = null) {
+	
 	$api_key = get_option('LINKEDIN_API_KEY');
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
-
+	
+	if(!isset($redirect)) {
+		$redirect = get_linkedin_redirect_url();
+	}
+	
 	if ( $_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['code'])) {
 //		get_linkedin_datastore()->clear();
 		$args = array(
@@ -186,13 +190,18 @@ function get_linkedin_token() {
  * Build the autorization code URL.
  *
  * @param string $scope Space separated list of LinkedIn memeber permissions to set. Default is 'r_basicprofile'
+ * @param string $redirect Redurect URL for LinkedIn API calls. If not set, the curent page URL is taken.
  * @return string The autorization code URL
  *
  * @since    1.0.0
  */
-function get_linkedin_authorization_url($scope='r_basicprofile') {
+function get_linkedin_authorization_url($scope = 'r_basicprofile', $redirect = null) {
 	$api_key = get_option('LINKEDIN_API_KEY');
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
+	
+	if(!isset($redirect)) {
+		$redirect = get_linkedin_redirect_url();
+	}
 	
 	if($api_key && $api_secret) {
 		$args = array(
@@ -200,7 +209,7 @@ function get_linkedin_authorization_url($scope='r_basicprofile') {
 			'client_id'     => $api_key,
 			'scope'         => $scope,
 			'state'         => base64_encode(time()),
-			'redirect_uri'  => get_linkedin_redirect_url(),
+			'redirect_uri'  => $redirect,
 		);
 		
 		return LINKEDIN_OAUTH_URL . "/authorization?" . http_build_query($args);
