@@ -25,7 +25,7 @@ class LinkedIn_OAuth2 {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.1.0';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -305,8 +305,6 @@ class LinkedIn_OAuth2 {
 	 * @since    1.0.0
 	 */
 	public function start_linkedin_session() {
-		if(!session_id()) {
-			session_start();
-		}
+		SessionDataStore::createSession();
 	}
 }

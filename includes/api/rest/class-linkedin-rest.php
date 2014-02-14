@@ -104,7 +104,6 @@ abstract class LinkedInRest
 			return null;
 		}
 		
-		
 		if(is_wp_error($response))
 			return $response;
 		else
