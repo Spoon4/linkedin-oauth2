@@ -46,7 +46,6 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/api/exceptions/class-datas
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/class-linkedin-token.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/class-linkedin-data.php' );
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/api/datastore/class-datastore-singleton.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/datastore/interface-linkedin-datastore.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/api/datastore/class-session-datastore.php' );
 
