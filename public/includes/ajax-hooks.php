@@ -28,7 +28,7 @@ function post_linkedin_share_ajax_action() {
 	}
 }
 
-function logout_linkedin_ajax_action() {
+function linkedin_logout_ajax_action() {
 	clear_linkedin_data();
 	send_ajax_response(true, 'ok');
 }

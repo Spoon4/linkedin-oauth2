@@ -272,6 +272,7 @@ class LinkedIn_OAuth2 {
 	public function enqueue_scripts() {
 		wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
         wp_localize_script($this->plugin_slug . '-plugin-script', 'AjaxParams', array( 
+            'logout_url' => admin_url( 'admin-ajax.php' ).'?action=linkedin_logout',
             'share_api_url' => admin_url( 'admin-ajax.php' ).'?action=post_linkedin_share',
             'share_nonce'   => wp_create_nonce('_wp_linkedin_share_nonce'),
         ));
@@ -290,7 +291,7 @@ class LinkedIn_OAuth2 {
 		$ajax_actions_map = array(
 			"post_linkedin_share"    => "post_linkedin_share_ajax_action",
 			"get_linkedin_profile"   => "get_linkedin_profile_ajax_action",
-            "logout_linkedin"        => "logout_linkedin_ajax_action",
+            "linkedin_logout"        => "linkedin_logout_ajax_action",
 		);
 	
 		foreach($ajax_actions_map as $action => $function){
