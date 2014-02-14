@@ -57,7 +57,7 @@ abstract class LinkedInRest
  	 * @since    1.0.0
 	 */
 	protected function getQueryString() {
-		return "oauth2_access_token=".$this->token->getToken()."&format=$this->format";
+		return "oauth2_access_token=$this->token&format=$this->format";
 	}
 	
 	/**
