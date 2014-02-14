@@ -57,7 +57,7 @@ abstract class LinkedInRest
  	 * @since    1.0.0
 	 */
 	protected function getQueryString() {
-		return "oauth2_access_token=$this->token&format=$this->format";
+		return "oauth2_access_token=".$this->token->getToken()."&format=$this->format";
 	}
 	
 	/**
@@ -84,7 +84,7 @@ abstract class LinkedInRest
 	protected function call($method, $params, $headers = array()) {
 		$response = null;
 		$api_url = $this->getServiceURL();
-
+		
 		add_filter('https_ssl_verify', '__return_false');
 		
 		if('post' == strtolower($method)) {
@@ -103,7 +103,6 @@ abstract class LinkedInRest
 		} else {
 			return null;
 		}
-		
 		
 		if(is_wp_error($response))
 			return $response;

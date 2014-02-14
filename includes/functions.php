@@ -228,6 +228,9 @@ function linkedin_errors() {
 		$error = new WP_Error($data->error, $data->error_description);
 		clear_linkedin_data();
 		return $error;
+
 	}
+
 	return null;
+
 }
