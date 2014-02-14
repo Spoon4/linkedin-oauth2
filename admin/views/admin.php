@@ -25,6 +25,7 @@
 	if ( $_SERVER["REQUEST_METHOD"] == "POST" ){
 		update_option( 'LINKEDIN_API_KEY', $_POST['api_key'] );
 		update_option( 'LINKEDIN_API_SECRET_KEY', $_POST['api_secret_key'] );
+		update_option( 'LINKEDIN_API_SCOPE', $_POST['api_scope'] );
 	}
 	
 	?>
@@ -32,12 +33,16 @@
 	<form name="options" method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 		<table class="form-table">
 			<tr valign="row">
-				<th scope="row"><label for="api_key"><?php _e('API Key')?><span class="required"> (*)</span>: </label></th>
+				<th scope="row"><label for="api_key"><?php _e('API Key')?><span class="required"> (*)</span></label></th>
 				<td><input type="text" name="api_key" value="<?php echo get_option( 'LINKEDIN_API_KEY', '' ); ?>" size="70" class="regular-text"></td>
 			</tr>
 			<tr valign="row">
-				<th scope="row"><label for="api_secret_key"><?php _e('Consumer Secret')?><span class="required"> (*)</span>: </label></th>
+				<th scope="row"><label for="api_secret_key"><?php _e('Consumer Secret')?><span class="required"> (*)</span></label></th>
 				<td><input type="text" name="api_secret_key" value="<?php echo get_option( 'LINKEDIN_API_SECRET_KEY', '' ); ?>" size="70" class="regular-text"></td>
+			</tr>
+			<tr valign="row">
+				<th scope="row"><label for="api_scope"><?php _e('Scope')?></label></th>
+				<td><input type="text" name="api_scope" value="<?php echo get_option( 'LINKEDIN_API_SCOPE', '' ); ?>" size="70" class="regular-text"></td>
 			</tr>
 		</table>
 		<p class="submit">
