@@ -13,9 +13,9 @@ function get_linkedin_profile_ajax_action() {
 	if($token) {
 		$member = isset($_GET['member']) ? $_GET['member'] : LinkedInProfile::ME;
 		$profile = get_linkedin_profile($token, $member);
-    LinkedInAjaxResponse::success($profile);
+        LinkedInAjaxResponse::success($profile);
 	} else {
-    LinkedInAjaxResponse::error(__('Invalid token'));
+        LinkedInAjaxResponse::error(__('Invalid token'));
 	}
 }
 
@@ -23,13 +23,13 @@ function post_linkedin_share_ajax_action() {
 	$token = get_linkedin_token();
 	if($token) {
 		$result = post_linkedin_share($token, $_POST);
-		LinkedInAjaxResponse::success($result);
+        LinkedInAjaxResponse::success($result);
 	} else {
-		LinkedInAjaxResponse::error(__('Invalid token'));
+        LinkedInAjaxResponse::error(__('Invalid token'));
 	}
 }
 
 function linkedin_logout_ajax_action() {
 	clear_linkedin_data();
-	LinkedInAjaxResponse::success('ok');
+    LinkedInAjaxResponse::success('ok');
 }
