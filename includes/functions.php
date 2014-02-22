@@ -200,7 +200,7 @@ function get_linkedin_authorization_url($scope = null, $redirect = null) {
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
 	
     if(!isset($scope)) {
-        $scope = get_option('LINKEDIN_API_SCOPE');
+        $scope = get_option('LINKEDIN_API_SCOPE', 'r_basicprofile');
     }
     
 	if(!isset($redirect)) {
