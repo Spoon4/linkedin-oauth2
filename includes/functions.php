@@ -66,28 +66,6 @@ function get_linkedin_oauth_data() {
 }
 
 /**
- * Check if a user is "LinkedIn connected".
- *
- * @return boolean
- *
- * @since    1.0.0
- */
-function is_linkedin_user_connected() {
-	return get_linkedin_datastore()->exists();
-}
-
-/**
- * Check if a saved token exists and is not expired.
- *
- * @return boolean
- *
- * @since    1.0.0
- */
-function is_linkedin_token_valid() {
-	return get_linkedin_token() ? get_linkedin_token()->isValid() : false;
-}
-
-/**
  * Get redirect URL from current page.
  *
  * @return string The current URL
@@ -172,21 +150,6 @@ function check_linkedin_authorization_code($redirect = null) {
 }
 
 /**
- * Retreive saved token of user if connected and valid.
- *
- * @return LinkedInToken The access token object
- *
- * @since    1.0.0
- */
-function get_linkedin_token() {
-	try {
-		return is_linkedin_user_connected() ? get_linkedin_datastore()->getToken() : null;
-	} catch(LinkedInTokenException $e) {
-		return null;
-	}
-}
-
-/**
  * Build the autorization code URL.
  *
  * @param string $scope Space separated list of LinkedIn memeber permissions to set. Default is 'r_basicprofile'
@@ -228,25 +191,4 @@ function get_linkedin_authorization_url($scope = null, $redirect = null) {
  */
 function clear_linkedin_data() {
 	get_linkedin_datastore()->clear();
-}
-
-/**
- * Get the authentication errors.
- *
- * @return WP_Error
- *
- * @since    1.0.0
- */
-function linkedin_errors() {
-	$data = get_linkedin_oauth_data();
-	
-	if(isset($data->error)) {
-		$error = new WP_Error($data->error, $data->error_description);
-		clear_linkedin_data();
-		return $error;
-
-	}
-
-	return null;
-
 }
