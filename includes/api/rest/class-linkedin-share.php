@@ -101,7 +101,7 @@ class LinkedInShare extends LinkedInRest
  	 * @since    1.0.0
 	 */
 	private function isValid($value) {
-        if(!is_null($value) || isset($value))
+        if(!isset($value) || is_null($value))
 			return false;
 		if(is_string($value))
 			return ('' !== $value);

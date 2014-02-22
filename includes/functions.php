@@ -195,10 +195,14 @@ function get_linkedin_token() {
  *
  * @since    1.0.0
  */
-function get_linkedin_authorization_url($scope = 'r_basicprofile', $redirect = null) {
+function get_linkedin_authorization_url($scope = null, $redirect = null) {
 	$api_key = get_option('LINKEDIN_API_KEY');
 	$api_secret = get_option('LINKEDIN_API_SECRET_KEY');
 	
+    if(!isset($scope)) {
+        $scope = get_option('LINKEDIN_API_SCOPE');
+    }
+    
 	if(!isset($redirect)) {
 		$redirect = get_linkedin_redirect_url();
 	}

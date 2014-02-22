@@ -72,6 +72,10 @@ register_deactivation_hook( __FILE__, array( 'LinkedIn_OAuth2', 'deactivate' ) )
 
 add_action( 'plugins_loaded', array( 'LinkedIn_OAuth2', 'get_instance' ) );
 
+if( defined( 'DOING_AJAX' ) || DOING_AJAX ) {
+	add_action( 'plugins_loaded', array( 'LinkedIn_OAuth2', 'add_ajax_actions' ) );
+}
+
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
  *----------------------------------------------------------------------------*/
