@@ -5,7 +5,7 @@
 		$.ajax({
 		    type : "post",
 		    dataType : "json",
-		    url : AjaxParams.share_api_url,
+		    url : LinkedInAjaxParams.share_api_url,
 		    data : postData,
 		    success: function(response) {
                 successCallback(response);
@@ -20,7 +20,7 @@
 		$.ajax({
 		    type : "get",
 		    dataType : "json",
-		    url : AjaxParams.profile_api_url,
+		    url : LinkedInAjaxParams.profile_api_url,
 		    success: function(response) {
                 successCallback(response);
 		    },
@@ -34,7 +34,7 @@
 		$.ajax({
 		    type : "get",
 		    dataType : "json",
-		    url : AjaxParams.logout_url,
+		    url : LinkedInAjaxParams.logout_url,
 		    success: function(response) {
                 successCallback(response);
 		    },
@@ -45,6 +45,7 @@
 	}
 
 	$(function () {
+		
 	});
 
 }(jQuery));
