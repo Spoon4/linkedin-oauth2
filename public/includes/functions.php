@@ -11,13 +11,14 @@
  * Display the LinkedIn sign in link.
  *
  * @param string $label The label of the link
+ * @param string $scope The LinkedIn profile scope
  *
  * @since    1.0.0
  */
 function linkedin_link($label = null, $scope = null) {
 ?>
-	<a class="linkedin-btn" type="button" href="<?php echo get_linkedin_authorization_url($scope); ?>">
-		<?php echo is_null($label) ? __('Authenticate') : $label?>
+	<a class="linkedin-connect-btn" type="button" href="<?php echo get_linkedin_authorization_url($scope); ?>">
+		<?php echo !$label ? '' : $label?>
 	</a>
 <?php
 }

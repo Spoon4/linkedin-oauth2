@@ -1,6 +1,6 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
 
-.linkedin-btn {
+.linkedin-connect-btn {
 	background: url(../images/linkedin-signin-button.png) no-repeat ;
 	height: 30px;
 	width: 150px;
